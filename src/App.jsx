@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.scss';
-import { Header, Game, Footer } from './containers';
 import { PageLayout } from './components';
+import { Header, Main, Footer } from './containers';
 
 function App() {
   return (
     <PageLayout>
       <Header />
-      <Game />
+      <Main />
       <Footer />
     </PageLayout>
   );
