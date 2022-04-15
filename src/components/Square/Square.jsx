@@ -3,12 +3,17 @@
 import React from 'react';
 import styles from './styles.module.scss';
 
-function Square({ letter, setLetters, index }) {
+function Square({ letter, setLetters, index, turn }) {
+  const handleClick = () => {
+    if (letter === '') {
+      setLetters((prev) => ({ ...prev, [index]: turn }));
+    }
+  };
   return (
     <span
       role="button"
       tabIndex={index}
-      onClick={() => setLetters((prev) => ({ ...prev, [index]: 'x' }))}
+      onClick={handleClick}
       className={`${styles.span}`}
     >
       {letter}

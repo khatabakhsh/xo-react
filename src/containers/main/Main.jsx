@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Game from '../game/Game';
 
 function Main() {
   return (
     <main>
       <div>players</div>
-      <Game />
+      <Game turn="x" />
     </main>
   );
 }

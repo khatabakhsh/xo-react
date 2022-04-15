@@ -13,6 +13,7 @@ function Game() {
     8: '',
     9: '',
   });
+  const level = Object.values(letters).filter((item) => item !== '').length;
   return (
     <Grid>
       {Object.keys(letters).map((letterIndex) => {
@@ -22,6 +23,7 @@ function Game() {
             setLetters={setLetters}
             index={Number(letterIndex)}
             key={Number(letterIndex)}
+            turn={level % 2 === 0 ? 'X' : 'O'}
           />
         );
       })}
