@@ -3,10 +3,11 @@
 import React from 'react';
 import styles from './styles.module.scss';
 
-function Square({ letter, setLetters, index, turn }) {
+function Square({ letter, setSquares, index, turn, changeTurn, win }) {
   const handleClick = () => {
-    if (letter === '') {
-      setLetters((prev) => ({ ...prev, [index]: turn }));
+    if (letter === '' && !win) {
+      setSquares((prev) => ({ ...prev, [index]: turn }));
+      changeTurn();
     }
   };
   return (
