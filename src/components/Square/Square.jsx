@@ -1,15 +1,15 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './styles.module.scss';
 
-function Square({ letter, setSquares, index, turn, changeTurn, win }) {
+function Square({ letter, setSquares, index, turn, win }) {
   const handleClick = () => {
     if (letter === '' && !win) {
       setSquares((prev) => ({ ...prev, [index]: turn }));
-      changeTurn();
     }
   };
+  console.log('square');
   return (
     <span
       role="button"
@@ -22,4 +22,4 @@ function Square({ letter, setSquares, index, turn, changeTurn, win }) {
   );
 }
 
-export default Square;
+export default memo(Square);
