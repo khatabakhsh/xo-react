@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-expressions */
 import React, { useState } from 'react';
 import Game from '../game/Game';
+import { Button } from '../../components';
 
 function Main() {
-  const [squares, setSquares] = useState({
+  const initialSquares = {
     1: '',
     2: '',
     3: '',
@@ -13,7 +14,8 @@ function Main() {
     7: '',
     8: '',
     9: '',
-  });
+  };
+  const [squares, setSquares] = useState(initialSquares);
   const level = Object.values(squares).filter((item) => item !== '').length;
   const turn = level % 2 === 0 ? 'X' : 'O';
   let end = level === 9;
@@ -53,6 +55,11 @@ function Main() {
         <div>{!end ? `${turn} Turn` : `player ${turn} won`}</div>
       </div>
       <Game squares={squares} setSquares={setSquares} turn={turn} win={win} />
+      <Button
+        type="button"
+        text="Reset"
+        onClick={() => setSquares(initialSquares)}
+      />
     </main>
   );
 }
