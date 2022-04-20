@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-expressions */
 import React, { useState } from 'react';
+import styles from './styles.module.scss';
 import Game from '../game/Game';
 import { Button } from '../../components';
 
@@ -16,9 +17,10 @@ function Main() {
     9: { value: '', turn: 'X' },
   };
   const [squares, setSquares] = useState(initialSquares);
-  const level = Object.values(squares).filter((item) => item !== '').length;
+  const level = Object.values(squares).filter(
+    (item) => item.value !== ''
+  ).length;
   const turn = level % 2 === 0 ? 'X' : 'O';
-  let end = level === 9;
 
   const horizontalFirst =
     squares[1].value === squares[2].value &&
@@ -60,15 +62,13 @@ function Main() {
 
   const win = horizontal || vertical || diagonal;
 
-  if (win) {
-    end = true;
-  }
-
   return (
-    <main>
+    <main className={styles.main}>
       <div>
-        <span>players</span>
-        <div>{!end ? `${turn} Turn` : `player ${turn} won`}</div>
+        <span>X</span>
+        <span>0 - 0</span>
+        <span>O</span>
+        {/* <div>{win === false ? `${turn} Turn` : `player ${turn} won`}</div> */}
       </div>
       <Game squares={squares} setSquares={setSquares} level={level} win={win} />
       <Button
