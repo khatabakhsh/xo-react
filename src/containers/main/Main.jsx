@@ -63,7 +63,7 @@ function Main() {
 
   return (
     <main className={styles.main}>
-      <Info />
+      <Info firstPlayer="X" secondPlayer="O" />
       <Grid>
         {Object.keys(squares).map((squareIndex) => {
           return (
@@ -71,6 +71,7 @@ function Main() {
               letter={squares[squareIndex].value}
               setSquares={setSquares}
               index={Number(squareIndex)}
+              turn={turn}
               win={win}
               // don't use index of map. squareIndex is string and unique.
               key={squareIndex}

@@ -2,12 +2,12 @@
 import React from 'react';
 import styles from './styles.module.scss';
 
-function Info() {
+function Info({ firstPlayer, secondPlayer }) {
   return (
-    <div>
-      <span>X</span>
+    <div className={styles.div}>
+      <span>{firstPlayer}</span>
       <span>0 - 0</span>
-      <span>O</span>
+      <span>{secondPlayer}</span>
       {/* <div>{win === false ? `${turn} Turn` : `player ${turn} won`}</div> */}
     </div>
   );
