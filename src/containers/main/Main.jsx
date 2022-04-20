@@ -5,15 +5,15 @@ import { Button } from '../../components';
 
 function Main() {
   const initialSquares = {
-    1: '',
-    2: '',
-    3: '',
-    4: '',
-    5: '',
-    6: '',
-    7: '',
-    8: '',
-    9: '',
+    1: { value: '', turn: 'X' },
+    2: { value: '', turn: 'O' },
+    3: { value: '', turn: 'X' },
+    4: { value: '', turn: 'O' },
+    5: { value: '', turn: 'X' },
+    6: { value: '', turn: 'O' },
+    7: { value: '', turn: 'X' },
+    8: { value: '', turn: 'O' },
+    9: { value: '', turn: 'X' },
   };
   const [squares, setSquares] = useState(initialSquares);
   const level = Object.values(squares).filter((item) => item !== '').length;
@@ -21,25 +21,41 @@ function Main() {
   let end = level === 9;
 
   const horizontalFirst =
-    squares[1] === squares[2] && squares[2] === squares[3] && squares[2] !== '';
+    squares[1].value === squares[2].value &&
+    squares[2].value === squares[3].value &&
+    squares[2].value !== '';
   const horizontalSecond =
-    squares[4] === squares[5] && squares[5] === squares[6] && squares[5] !== '';
+    squares[4].value === squares[5].value &&
+    squares[5].value === squares[6].value &&
+    squares[5].value !== '';
   const horizontalThird =
-    squares[7] === squares[8] && squares[8] === squares[9] && squares[8] !== '';
+    squares[7].value === squares[8].value &&
+    squares[8].value === squares[9].value &&
+    squares[8].value !== '';
   const horizontal = horizontalFirst || horizontalSecond || horizontalThird;
 
   const verticalFirst =
-    squares[1] === squares[4] && squares[4] === squares[7] && squares[4] !== '';
+    squares[1].value === squares[4].value &&
+    squares[4].value === squares[7].value &&
+    squares[4].value !== '';
   const verticalSecond =
-    squares[2] === squares[5] && squares[5] === squares[8] && squares[5] !== '';
+    squares[2].value === squares[5].value &&
+    squares[5].value === squares[8].value &&
+    squares[5].value !== '';
   const verticalThird =
-    squares[3] === squares[6] && squares[6] === squares[9] && squares[6] !== '';
+    squares[3].value === squares[6].value &&
+    squares[6].value === squares[9].value &&
+    squares[6].value !== '';
   const vertical = verticalFirst || verticalSecond || verticalThird;
 
   const diagonalFirst =
-    squares[1] === squares[5] && squares[5] === squares[9] && squares[5] !== '';
+    squares[1].value === squares[5].value &&
+    squares[5].value === squares[9].value &&
+    squares[5].value !== '';
   const diagonalSecond =
-    squares[3] === squares[5] && squares[5] === squares[7] && squares[5] !== '';
+    squares[3].value === squares[5].value &&
+    squares[5].value === squares[7].value &&
+    squares[5].value !== '';
   const diagonal = diagonalFirst || diagonalSecond;
 
   const win = horizontal || vertical || diagonal;
@@ -54,7 +70,7 @@ function Main() {
         <span>players</span>
         <div>{!end ? `${turn} Turn` : `player ${turn} won`}</div>
       </div>
-      <Game squares={squares} setSquares={setSquares} turn={turn} win={win} />
+      <Game squares={squares} setSquares={setSquares} level={level} win={win} />
       <Button
         type="button"
         text="Reset"
