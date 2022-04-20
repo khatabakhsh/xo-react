@@ -3,19 +3,23 @@
 import React, { memo } from 'react';
 import styles from './styles.module.scss';
 
-function Square({ letter, setSquares, index, turn, win }) {
+function Square({ letter, setSquares, index, win }) {
   const handleClick = () => {
     if (letter === '' && !win) {
-      setSquares((prev) => ({ ...prev, [index]: turn }));
+      setSquares((prev) => ({
+        ...prev,
+        [index]: { ...prev[index], value: prev[index].turn },
+      }));
     }
   };
-  console.log('square');
   return (
     <span
       role="button"
       tabIndex={index}
       onClick={handleClick}
-      className={`${styles.span}`}
+      className={`${styles.span} ${
+        letter === 'X' ? styles.firstPlayer : styles.secondPlayer
+      }`}
     >
       {letter}
     </span>

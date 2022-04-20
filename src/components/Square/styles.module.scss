@@ -1,5 +1,24 @@
+@import '../../assets/sass/_variables.scss';
+
 .span {
-  border: 1px solid black;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // border: 1px solid black;
+  border-radius: 30px;
   width: 100px;
   height: 100px;
+  background-color: rgb(255, 255, 255);
+  // box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  // box-shadow: rgba($textColor, 0.2) 0px 2px 8px 0px;
+  box-shadow: rgba($textColor, 0.3) 0px 1px 2px 0px,
+    rgba($textColor, 0.15) 0px 1px 3px 1px;
+}
+
+.firstPlayer {
+  color: $firstPlayer;
+}
+.secondPlayer {
+  color: $secondPlayer;
 }

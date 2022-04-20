@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import React, { useState } from 'react';
 import styles from './styles.module.scss';
-import { Button, Grid, Square } from '../../components';
+import { Button, Grid, Square, Info } from '../../components';
 
 function Main() {
   const initialSquares = {
@@ -63,12 +63,7 @@ function Main() {
 
   return (
     <main className={styles.main}>
-      <div>
-        <span>X</span>
-        <span>0 - 0</span>
-        <span>O</span>
-        {/* <div>{win === false ? `${turn} Turn` : `player ${turn} won`}</div> */}
-      </div>
+      <Info />
       <Grid>
         {Object.keys(squares).map((squareIndex) => {
           return (
