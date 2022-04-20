@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import React, { useState } from 'react';
 import styles from './styles.module.scss';
-import Game from '../game/Game';
-import { Button } from '../../components';
+import { Button, Grid, Square } from '../../components';
 
 function Main() {
   const initialSquares = {
@@ -70,7 +69,20 @@ function Main() {
         <span>O</span>
         {/* <div>{win === false ? `${turn} Turn` : `player ${turn} won`}</div> */}
       </div>
-      <Game squares={squares} setSquares={setSquares} level={level} win={win} />
+      <Grid>
+        {Object.keys(squares).map((squareIndex) => {
+          return (
+            <Square
+              letter={squares[squareIndex].value}
+              setSquares={setSquares}
+              index={Number(squareIndex)}
+              win={win}
+              // don't use index of map. squareIndex is string and unique.
+              key={squareIndex}
+            />
+          );
+        })}
+      </Grid>
       <Button
         type="button"
         text="Reset"
