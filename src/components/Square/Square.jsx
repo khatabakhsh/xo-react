@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
-import React, { memo } from 'react';
+import React from 'react';
 import styles from './styles.module.scss';
 
 function Square({ letter, setSquares, index, turn, win }) {
@@ -18,9 +18,9 @@ function Square({ letter, setSquares, index, turn, win }) {
         letter === 'X' ? styles.firstPlayer : styles.secondPlayer
       }`}
     >
-      {letter}
+      <p>{letter}</p>
     </span>
   );
 }
 
-export default memo(Square);
+export default Square;

@@ -1,6 +1,12 @@
+@import '../../assets/sass/_variables.scss';
+
 .header {
-  height: 13vh;
+  height: 10vh;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.h1 {
+  font-size: 25px;
+  color: $textColor;
 }

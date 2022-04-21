@@ -1,12 +1,16 @@
-@font-face {
-  font-family: MeriendaRegular;
-  src: url('../../assets/fonts/Merienda/Regular.ttf');
-}
+@import '../../assets/sass/_variables.scss';
 
 .footer {
   font-family: 'MeriendaRegular', cursive;
+  font-size: 15px;
   height: 7vh;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.small {
+  a {
+    color: $textColor;
+    text-decoration: none;
+  }
 }
