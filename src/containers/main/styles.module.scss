@@ -1,7 +1,9 @@
+
 .main {
+  height: 80vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  // justify-content: flex-start;
   align-items: center;
   gap: 20px;
 }
