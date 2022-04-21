@@ -1,5 +1,8 @@
 $bgColor: #ffffff;
-$textColor: rgb(19, 23, 34);
+$textColor: #333333;
 
 $firstPlayer: #26a69a;
 $secondPlayer: #ef5350;
+
+$boxShadow: rgba($textColor, 0.3) 0px 1px 2px 0px,
+  rgba($textColor, 0.15) 0px 1px 3px 1px;

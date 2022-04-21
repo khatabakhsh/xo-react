@@ -6,9 +6,11 @@ function Info({ firstPlayer, secondPlayer, scores, turn, win, draw }) {
   return (
     <div className={styles.container}>
       <div className={styles.players}>
-        <span>{firstPlayer}</span>
-        <span>{`${scores.firstPlayer} - ${scores.secondPlayer}`}</span>
-        <span>{secondPlayer}</span>
+        <span className={styles.player}>{firstPlayer}</span>
+        <span
+          className={styles.scores}
+        >{`${scores.firstPlayer} - ${scores.secondPlayer}`}</span>
+        <span className={styles.player}>{secondPlayer}</span>
       </div>
       <div
         className={`${styles.turn} ${
