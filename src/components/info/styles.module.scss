@@ -7,7 +7,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
 }
 .players {
   width: 100%;
@@ -41,6 +41,7 @@
 }
 .draw {
   align-self: inherit;
+  color: gray;
 }
 .win {
   align-self: inherit;

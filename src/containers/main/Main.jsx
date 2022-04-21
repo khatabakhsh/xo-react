@@ -81,11 +81,18 @@ function Main({ scores }) {
           );
         })}
       </Grid>
-      <Button
-        type="button"
-        text="Reset"
-        onClick={() => setSquares(initialSquares)}
-      />
+      <div className={styles.buttons}>
+        <Button
+          type="button"
+          text="New"
+          onClick={() => setSquares(initialSquares)}
+        />
+        <Button
+          type="button"
+          text="Clear"
+          onClick={() => setSquares(initialSquares)}
+        />
+      </div>
     </main>
   );
 }
