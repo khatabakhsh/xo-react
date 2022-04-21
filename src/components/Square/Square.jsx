@@ -3,13 +3,10 @@
 import React, { memo } from 'react';
 import styles from './styles.module.scss';
 
-function Square({ letter, setSquares, index, win }) {
+function Square({ letter, setSquares, index, turn, win }) {
   const handleClick = () => {
     if (letter === '' && !win) {
-      setSquares((prev) => ({
-        ...prev,
-        [index]: { ...prev[index], value: prev[index].turn },
-      }));
+      setSquares((prev) => ({ ...prev, [index]: turn }));
     }
   };
   return (

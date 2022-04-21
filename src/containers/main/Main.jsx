@@ -1,74 +1,76 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-expressions */
 import React, { useState } from 'react';
 import styles from './styles.module.scss';
 import { Button, Grid, Square, Info } from '../../components';
 
-function Main() {
+function Main({ scores }) {
   const initialSquares = {
-    1: { value: '', turn: 'X' },
-    2: { value: '', turn: 'O' },
-    3: { value: '', turn: 'X' },
-    4: { value: '', turn: 'O' },
-    5: { value: '', turn: 'X' },
-    6: { value: '', turn: 'O' },
-    7: { value: '', turn: 'X' },
-    8: { value: '', turn: 'O' },
-    9: { value: '', turn: 'X' },
+    1: '',
+    2: '',
+    3: '',
+    4: '',
+    5: '',
+    6: '',
+    7: '',
+    8: '',
+    9: '',
   };
   const [squares, setSquares] = useState(initialSquares);
-  const level = Object.values(squares).filter(
-    (item) => item.value !== ''
-  ).length;
-  const turn = level % 2 === 0 ? 'X' : 'O';
+  const level = Object.values(squares).filter((item) => item !== '').length;
+  let turn = level % 2 === 0 ? 'X' : 'O';
+  const changeTurn = () => {
+    turn === 'X' ? (turn = 'O') : (turn = 'X');
+  };
+  let draw = false;
 
   const horizontalFirst =
-    squares[1].value === squares[2].value &&
-    squares[2].value === squares[3].value &&
-    squares[2].value !== '';
+    squares[1] === squares[2] && squares[2] === squares[3] && squares[2] !== '';
   const horizontalSecond =
-    squares[4].value === squares[5].value &&
-    squares[5].value === squares[6].value &&
-    squares[5].value !== '';
+    squares[4] === squares[5] && squares[5] === squares[6] && squares[5] !== '';
   const horizontalThird =
-    squares[7].value === squares[8].value &&
-    squares[8].value === squares[9].value &&
-    squares[8].value !== '';
+    squares[7] === squares[8] && squares[8] === squares[9] && squares[8] !== '';
   const horizontal = horizontalFirst || horizontalSecond || horizontalThird;
 
   const verticalFirst =
-    squares[1].value === squares[4].value &&
-    squares[4].value === squares[7].value &&
-    squares[4].value !== '';
+    squares[1] === squares[4] && squares[4] === squares[7] && squares[4] !== '';
   const verticalSecond =
-    squares[2].value === squares[5].value &&
-    squares[5].value === squares[8].value &&
-    squares[5].value !== '';
+    squares[2] === squares[5] && squares[5] === squares[8] && squares[5] !== '';
   const verticalThird =
-    squares[3].value === squares[6].value &&
-    squares[6].value === squares[9].value &&
-    squares[6].value !== '';
+    squares[3] === squares[6] && squares[6] === squares[9] && squares[6] !== '';
   const vertical = verticalFirst || verticalSecond || verticalThird;
 
   const diagonalFirst =
-    squares[1].value === squares[5].value &&
-    squares[5].value === squares[9].value &&
-    squares[5].value !== '';
+    squares[1] === squares[5] && squares[5] === squares[9] && squares[5] !== '';
   const diagonalSecond =
-    squares[3].value === squares[5].value &&
-    squares[5].value === squares[7].value &&
-    squares[5].value !== '';
+    squares[3] === squares[5] && squares[5] === squares[7] && squares[5] !== '';
   const diagonal = diagonalFirst || diagonalSecond;
 
   const win = horizontal || vertical || diagonal;
 
+  if (win) {
+    changeTurn();
+    turn === 'X' ? (scores.firstPlayer += 1) : (scores.secondPlayer += 1);
+  } else if (level === 9) {
+    draw = true;
+  }
+
   return (
     <main className={styles.main}>
-      <Info firstPlayer="X" secondPlayer="O" />
+      <Info
+        firstPlayer="X"
+        secondPlayer="O"
+        scores={scores}
+        turn={turn}
+        win={win}
+        draw={draw}
+      />
       <Grid>
         {Object.keys(squares).map((squareIndex) => {
           return (
             <Square
-              letter={squares[squareIndex].value}
+              letter={squares[squareIndex]}
               setSquares={setSquares}
               index={Number(squareIndex)}
               turn={turn}

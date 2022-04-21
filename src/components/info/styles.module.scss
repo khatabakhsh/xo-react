@@ -1,6 +1,27 @@
-.div {
+.container {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.players {
+  width: 60%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 50%;
+}
+.firstTurn {
+  align-self: flex-start;
+}
+.secondTurn {
+  align-self: flex-end;
+}
+.draw {
+  align-self: inherit;
+}
+.win {
+  align-self: inherit;
 }
