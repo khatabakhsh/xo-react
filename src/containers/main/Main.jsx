@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import styles from './styles.module.scss';
 import { Button, Grid, Square, Info } from '../../components';
 
-function Main({ scores }) {
+function Main({ scores, resetScores }) {
   const initialSquares = {
     1: '',
     2: '',
@@ -85,7 +85,10 @@ function Main({ scores }) {
         <Button
           type="button"
           text="New"
-          onClick={() => setSquares(initialSquares)}
+          onClick={() => {
+            setSquares(initialSquares);
+            resetScores();
+          }}
         />
         <Button
           type="button"
