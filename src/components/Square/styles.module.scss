@@ -2,19 +2,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Merienda:wght@700&display=swap');
 
 .span {
-  font-family: 'Merienda', cursive;
+  font-family: 'MeriendaBold', cursive !important;
   font-size: 60px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  // border: 1px solid black;
   border-radius: 35px;
   width: 100px;
   height: 100px;
   background-color: #ffffff;
-  // box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  // box-shadow: rgba($textColor, 0.2) 0px 2px 8px 0px;
   box-shadow: $boxShadow;
 }
 

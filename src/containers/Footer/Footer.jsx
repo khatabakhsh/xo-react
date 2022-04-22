@@ -11,7 +11,7 @@ function Footer() {
           target="_blank"
           rel="noreferrer"
         >
-          See Repository on Github{' '}
+          See Repository on GitHub{' '}
           <img src={githubMark} alt="github-mark" width="15" height="15" />
         </a>
       </small>

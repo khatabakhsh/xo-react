@@ -1,10 +1,12 @@
 @import '../../assets/sass/_variables.scss';
 
 .header {
-  height: 10vh;
+  width: 310px;
+  height: 9vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: 1px dashed rgba($textColor, 0.3);
 }
 .h1 {
   font-size: 25px;

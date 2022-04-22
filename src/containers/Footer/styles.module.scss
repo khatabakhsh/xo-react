@@ -1,16 +1,23 @@
 @import '../../assets/sass/_variables.scss';
 
 .footer {
-  font-family: 'MeriendaRegular', cursive;
   font-size: 15px;
   height: 7vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .small {
+  font-family: 'ComfortaaMedium', cursive;
   a {
     color: $textColor;
     text-decoration: none;
+  }
+}
+@supports (font-variation-settings: normal) {
+  .small {
+    font-family: 'ComfortaaV', cursive;
+    font-variation-settings: 'wght' 500;
   }
 }

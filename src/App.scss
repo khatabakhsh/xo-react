@@ -2,12 +2,33 @@
   font-family: MeriendaBold;
   src: url('./assets/fonts/Merienda/Bold.ttf');
 }
+//////////////////////////////////////////////
 @font-face {
-  font-family: MeriendaRegular;
-  src: url('./assets/fonts/Merienda/Regular.ttf');
+  font-family: ComfortaaV;
+  src: url('./assets/fonts/Comfortaa/Comfortaa-VariableFont_wght.ttf'),
+    /* will be the standard and works in Safari now */
+      url('./assets/fonts/Comfortaa/Comfortaa-VariableFont_wght.ttf');
+  /* for the other supporting browsers */
+  font-weight: 300 700;
+  font-display: fallback;
 }
-
+@font-face {
+  font-family: ComfortaaBold;
+  src: url('./assets/fonts/Comfortaa/Comfortaa-Bold.ttf');
+}
+@font-face {
+  font-family: ComfortaaMedium;
+  src: url('./assets/fonts/Comfortaa/Comfortaa-Medium.ttf');
+}
+//////////////////////////////////////////////
 body,
 * {
-  font-family: 'MeriendaBold', cursive;
+  font-family: 'ComfortaaBold', cursive;
+}
+@supports (font-variation-settings: normal) {
+  body,
+  * {
+    font-family: 'ComfortaaV', cursive;
+    font-variation-settings: 'wght' 700;
+  }
 }
