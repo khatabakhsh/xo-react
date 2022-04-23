@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import './App.scss';
 import { PageLayout } from './components';
 import { Header, Main, Footer } from './containers';
@@ -15,7 +16,12 @@ function App() {
   return (
     <PageLayout>
       <Header />
-      <Main scores={scores} resetScores={resetScores} />
+      <Routes>
+        <Route
+          path="game"
+          element={<Main scores={scores} resetScores={resetScores} />}
+        />
+      </Routes>
       <Footer />
     </PageLayout>
   );
