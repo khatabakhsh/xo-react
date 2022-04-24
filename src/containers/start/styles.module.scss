@@ -1,0 +1,21 @@
+@import '../../assets/sass/_variables.scss';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  button {
+    width: 55%;
+    margin: 12px auto;
+  }
+  input[name='FirstPlayer'] {
+    color: $firstPlayer;
+    caret-color: $firstPlayer;
+  }
+  input[name='SecondPlayer'] {
+    color: $secondPlayer;
+    caret-color: $secondPlayer;
+  }
+}
