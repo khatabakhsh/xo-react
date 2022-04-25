@@ -10,12 +10,26 @@
     width: 55%;
     margin: 12px auto;
   }
-  input[name='FirstPlayer'] {
+  input[name='firstPlayer'] {
     color: $firstPlayer;
     caret-color: $firstPlayer;
   }
-  input[name='SecondPlayer'] {
+  input[name='secondPlayer'] {
     color: $secondPlayer;
     caret-color: $secondPlayer;
+  }
+}
+.error {
+  font-family: 'ComfortaaMedium';
+  font-size: 13px;
+  color: $buttonColor;
+  height: 13px;
+  align-self: flex-start;
+  margin: 1px 5px;
+  padding-top: 3px;
+}
+@supports (font-variation-settings: normal) {
+  .error {
+    font-variation-settings: 'wght' 500;
   }
 }
