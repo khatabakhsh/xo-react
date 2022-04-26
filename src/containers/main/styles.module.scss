@@ -12,6 +12,11 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  margin-top: 20px;
+  margin: 20px auto;
 
+  button {
+    &:first-child {
+      background-color: #2962ff !important;
+    }
+  }
 }

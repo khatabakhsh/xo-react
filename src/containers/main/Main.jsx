@@ -107,17 +107,17 @@ function Main({ players, setPlayerNames }) {
       <div className={styles.buttons}>
         <Button
           type="button"
+          text="Clear"
+          onClick={() => setSquares(initialSquares)}
+        />
+        <Button
+          type="button"
           text="New"
           onClick={() => {
             setSquares(initialSquares);
             setPlayerNames('', '');
             navigate('/', { replace: true });
           }}
-        />
-        <Button
-          type="button"
-          text="Clear"
-          onClick={() => setSquares(initialSquares)}
         />
       </div>
     </main>
