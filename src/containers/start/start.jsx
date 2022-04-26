@@ -47,7 +47,7 @@ function Start({ setPlayerNames }) {
           register={register('secondPlayer', {
             required: { value: true, message: '* Name required' },
             minLength: { value: 2, message: '* Name minimum 2 letters' },
-            maxLength: { value: 12, message: '* Name maximum 12 letters' },
+            maxLength: { value: 9, message: '* Name maximum 9 letters' },
             pattern: {
               value: /^[A-Z][A-Z0-9._-]+$/gi,
               message: '* First letter must English',
