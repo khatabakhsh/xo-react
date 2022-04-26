@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './styles.module.scss';
 import { Button, Grid, Square, Info } from '../../components';
 
+let counter = 0;
 function Main({ players, setPlayerNames }) {
   const initialSquares = {
     1: '',
@@ -24,10 +25,21 @@ function Main({ players, setPlayerNames }) {
   const symbolSecond = players.second.name[0].toUpperCase();
 
   const level = Object.values(squares).filter((item) => item !== '').length;
-  let turn = level % 2 === 0 ? symbolFirst : symbolSecond;
+
+  let turn = '';
+
+  if (level === 0) {
+    turn = counter % 2 === 0 ? symbolFirst : symbolSecond;
+  } else if (counter % 2 === 0) {
+    turn = level % 2 === 0 ? symbolFirst : symbolSecond;
+  } else {
+    turn = level % 2 === 1 ? symbolFirst : symbolSecond;
+  }
+
   const changeTurn = () => {
     turn === symbolFirst ? (turn = symbolSecond) : (turn = symbolFirst);
   };
+
   let draw = false;
 
   const horizontalFirst =
@@ -55,11 +67,13 @@ function Main({ players, setPlayerNames }) {
   const win = horizontal || vertical || diagonal;
 
   if (win) {
+    counter += 1;
     changeTurn();
     turn === symbolFirst
       ? (players.first.score += 1)
       : (players.second.score += 1);
   } else if (level === 9) {
+    counter += 1;
     draw = true;
   }
 
