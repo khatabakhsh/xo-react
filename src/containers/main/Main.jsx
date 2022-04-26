@@ -19,10 +19,14 @@ function Main({ players, setPlayerNames }) {
     9: '',
   };
   const [squares, setSquares] = useState(initialSquares);
+
+  const symbolFirst = players.first.name[0].toUpperCase();
+  const symbolSecond = players.second.name[0].toUpperCase();
+
   const level = Object.values(squares).filter((item) => item !== '').length;
-  let turn = level % 2 === 0 ? 'X' : 'O';
+  let turn = level % 2 === 0 ? symbolFirst : symbolSecond;
   const changeTurn = () => {
-    turn === 'X' ? (turn = 'O') : (turn = 'X');
+    turn === symbolFirst ? (turn = symbolSecond) : (turn = symbolFirst);
   };
   let draw = false;
 
@@ -52,7 +56,9 @@ function Main({ players, setPlayerNames }) {
 
   if (win) {
     changeTurn();
-    turn === 'X' ? (players.first.score += 1) : (players.second.score += 1);
+    turn === symbolFirst
+      ? (players.first.score += 1)
+      : (players.second.score += 1);
   } else if (level === 9) {
     draw = true;
   }
@@ -60,7 +66,13 @@ function Main({ players, setPlayerNames }) {
   const navigate = useNavigate();
   return (
     <main className={styles.main}>
-      <Info players={players} turn={turn} win={win} draw={draw} />
+      <Info
+        players={players}
+        turn={turn}
+        symbolFirst={symbolFirst}
+        win={win}
+        draw={draw}
+      />
       <Grid>
         {Object.keys(squares).map((squareIndex) => {
           return (
@@ -69,6 +81,7 @@ function Main({ players, setPlayerNames }) {
               setSquares={setSquares}
               index={Number(squareIndex)}
               turn={turn}
+              symbolFirst={symbolFirst}
               win={win}
               // don't use index of map. squareIndex is string and unique.
               key={squareIndex}

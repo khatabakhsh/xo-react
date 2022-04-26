@@ -2,7 +2,7 @@
 import React from 'react';
 import styles from './styles.module.scss';
 
-function Info({ players, turn, win, draw }) {
+function Info({ players, turn, symbolFirst, win, draw }) {
   return (
     <div className={styles.container}>
       <div className={styles.players}>
@@ -14,12 +14,16 @@ function Info({ players, turn, win, draw }) {
       </div>
       <div
         className={`${styles.turn} ${
-          turn === 'X' ? styles.firstTurn : styles.secondTurn
+          turn === symbolFirst ? styles.firstTurn : styles.secondTurn
         } ${!win && draw ? styles.draw : ''} ${win ? styles.win : ''}`}
       >
         {!win && !draw ? `${turn} Turn` : ''}
         {!win && draw ? 'draw' : ''}
-        {win ? `player ${turn} won` : ''}
+        {win
+          ? `${
+              turn === symbolFirst ? players.first.name : players.second.name
+            } won`
+          : ''}
       </div>
     </div>
   );
