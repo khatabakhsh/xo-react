@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.scss';
 import { PageLayout } from './components';
 import { Header, Main, Footer, Start } from './containers';
@@ -19,11 +19,14 @@ function App() {
     <PageLayout>
       <Header />
       <Routes>
+        <Route path="/" element={<Start setPlayerNames={setPlayerNames} />} />
         <Route
           path="game"
           element={<Main players={players} setPlayerNames={setPlayerNames} />}
         />
-        <Route path="/" element={<Start setPlayerNames={setPlayerNames} />} />
+        {players.first.name === '' && (
+          <Route path="game" element={<Navigate to="/" />} />
+        )}
       </Routes>
       <Footer />
     </PageLayout>
