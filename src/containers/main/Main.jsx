@@ -7,6 +7,7 @@ import styles from './styles.module.scss';
 import { Button, Grid, Square, Info } from '../../components';
 
 let counter = 0;
+
 function Main({ players, setPlayerNames }) {
   const initialSquares = {
     1: '',
