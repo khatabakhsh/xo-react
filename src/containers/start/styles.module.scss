@@ -1,4 +1,5 @@
-@import '../../assets/sass/_variables.scss';
+@import '../../assets/sass/variables';
+@import '../../assets/sass/mixins';
 
 .form {
   display: flex;
@@ -13,10 +14,18 @@
   input[name='firstPlayer'] {
     color: $firstPlayer;
     caret-color: $firstPlayer;
+    @include webkitAutofill {
+      transition: background-color 5000s ease-in-out 0s;
+      -webkit-text-fill-color: $firstPlayer;
+    }
   }
   input[name='secondPlayer'] {
     color: $secondPlayer;
     caret-color: $secondPlayer;
+    @include webkitAutofill {
+      transition: background-color 5000s ease-in-out 0s;
+      -webkit-text-fill-color: $secondPlayer;
+    }
   }
 }
 .error {
