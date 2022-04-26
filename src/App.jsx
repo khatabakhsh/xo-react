@@ -20,13 +20,13 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Start setPlayerNames={setPlayerNames} />} />
+        {players.first.name === '' && (
+          <Route path="game" element={<Navigate to="/" />} />
+        )}
         <Route
           path="game"
           element={<Main players={players} setPlayerNames={setPlayerNames} />}
         />
-        {players.first.name === '' && (
-          <Route path="game" element={<Navigate to="/" />} />
-        )}
       </Routes>
       <Footer />
     </PageLayout>
