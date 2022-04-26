@@ -2,10 +2,11 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-expressions */
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './styles.module.scss';
 import { Button, Grid, Square, Info } from '../../components';
 
-function Main({ scores, resetScores }) {
+function Main({ players, setPlayerNames }) {
   const initialSquares = {
     1: '',
     2: '',
@@ -51,21 +52,15 @@ function Main({ scores, resetScores }) {
 
   if (win) {
     changeTurn();
-    turn === 'X' ? (scores.firstPlayer += 1) : (scores.secondPlayer += 1);
+    turn === 'X' ? (players.first.score += 1) : (players.second.score += 1);
   } else if (level === 9) {
     draw = true;
   }
 
+  const navigate = useNavigate();
   return (
     <main className={styles.main}>
-      <Info
-        firstPlayer="X"
-        secondPlayer="O"
-        scores={scores}
-        turn={turn}
-        win={win}
-        draw={draw}
-      />
+      <Info players={players} turn={turn} win={win} draw={draw} />
       <Grid>
         {Object.keys(squares).map((squareIndex) => {
           return (
@@ -87,7 +82,8 @@ function Main({ scores, resetScores }) {
           text="New"
           onClick={() => {
             setSquares(initialSquares);
-            resetScores();
+            setPlayerNames('', '');
+            navigate('/', { replace: true });
           }}
         />
         <Button

@@ -1,16 +1,22 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import styles from './styles.module.scss';
 import { Input, Button } from '../../components';
 
-function Start() {
+function Start({ setPlayerNames }) {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const navigate = useNavigate();
+  const onSubmit = (data) => {
+    setPlayerNames(data.firstPlayer, data.secondPlayer);
+    navigate('/game', { replace: true });
+  };
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>

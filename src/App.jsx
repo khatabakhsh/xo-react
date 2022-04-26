@@ -5,12 +5,14 @@ import { PageLayout } from './components';
 import { Header, Main, Footer, Start } from './containers';
 
 function App() {
-  const [scores, setScores] = useState({ firstPlayer: 0, secondPlayer: 0 });
-  const resetScores = () => {
-    setScores((prev) => ({
-      ...prev,
-      firstPlayer: 0,
-      secondPlayer: 0,
+  const [players, setPlayers] = useState({
+    first: { name: '', score: 0 },
+    second: { name: '', score: 0 },
+  });
+  const setPlayerNames = (name1, name2) => {
+    setPlayers(() => ({
+      first: { name: name1, score: 0 },
+      second: { name: name2, score: 0 },
     }));
   };
   return (
@@ -19,9 +21,9 @@ function App() {
       <Routes>
         <Route
           path="game"
-          element={<Main scores={scores} resetScores={resetScores} />}
+          element={<Main players={players} setPlayerNames={setPlayerNames} />}
         />
-        <Route path="/" element={<Start />} />
+        <Route path="/" element={<Start setPlayerNames={setPlayerNames} />} />
       </Routes>
       <Footer />
     </PageLayout>

@@ -11,6 +11,7 @@ function Input({ label, name, type, register }) {
         {label}
       </label>
       <input
+        spellCheck="false"
         className={styles.input}
         type={type}
         id={name}
