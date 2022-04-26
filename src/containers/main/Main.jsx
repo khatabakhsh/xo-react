@@ -24,10 +24,21 @@ function Main({ players, setPlayerNames }) {
   const symbolSecond = players.second.name[0].toUpperCase();
 
   const level = Object.values(squares).filter((item) => item !== '').length;
-  let turn = level % 2 === 0 ? symbolFirst : symbolSecond;
+
+  let turn = '';
   const changeTurn = () => {
     turn === symbolFirst ? (turn = symbolSecond) : (turn = symbolFirst);
   };
+
+  const sumScores = players.first.score + players.second.score;
+  if (level === 0) {
+    turn = sumScores % 2 === 0 ? symbolFirst : symbolSecond;
+  } else if (sumScores % 2 === 0) {
+    turn = level % 2 === 0 ? symbolFirst : symbolSecond;
+  } else {
+    turn = level % 2 === 1 ? symbolFirst : symbolSecond;
+  }
+
   let draw = false;
 
   const horizontalFirst =
