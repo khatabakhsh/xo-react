@@ -3,7 +3,7 @@
 import React from 'react';
 import styles from './styles.module.scss';
 
-function Square({ letter, setSquares, index, turn, win }) {
+function Square({ letter, setSquares, index, turn, symbolFirst, win }) {
   const handleClick = () => {
     if (letter === '' && !win) {
       setSquares((prev) => ({ ...prev, [index]: turn }));
@@ -15,7 +15,7 @@ function Square({ letter, setSquares, index, turn, win }) {
       tabIndex={index}
       onClick={handleClick}
       className={`${styles.span} ${
-        letter === 'X' ? styles.firstPlayer : styles.secondPlayer
+        letter === symbolFirst ? styles.firstPlayer : styles.secondPlayer
       }`}
     >
       <p>{letter}</p>
