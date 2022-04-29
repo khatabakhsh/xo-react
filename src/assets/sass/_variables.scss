@@ -1,8 +1,22 @@
-$bgColor: #ffffff;
-$textColor: #333333;
-$buttonColor: #ff9933;
-$firstPlayer: #26a69a;
-$secondPlayer: #ef5350;
+$bg-lighter: #ffffff;
+$bg-light: #e9eaee;
+$bg-darker: #292e32;
+$bg-dark: #484c4f;
 
-$boxShadow: rgba($textColor, 0.3) 0px 1px 2px 0px,
-  rgba($textColor, 0.15) 0px 1px 3px 1px;
+$middle-light: #606060;
+$middle-dark: #c9cacc;
+
+$text-light: #ffffff;
+$text-dark: #333333;
+
+$button-bg: #ff9933;
+$button-blue-bg-light: #1a73e9;
+$button-blue-bg-dark: #5f97f6;
+
+$box-light: rgba($text-dark, 0.3) 0px 1px 2px 0px,
+  rgba($text-dark, 0.15) 0px 1px 3px 1px;
+$box-dark: rgba($text-light, 0.3) 0px 1px 2px 0px,
+  rgba($text-light, 0.15) 0px 1px 3px 1px;
+
+$first-player: #26a69a;
+$second-player: #ef5350;
