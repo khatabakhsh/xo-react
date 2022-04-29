@@ -13,7 +13,7 @@ function ThemeProvider({ children }) {
   const [theme, setTheme] = useState('light');
 
   const toggleThemeMode = useCallback(() => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
   }, []);
 
   const value = useMemo(
