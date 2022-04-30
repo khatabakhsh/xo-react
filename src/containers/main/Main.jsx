@@ -6,8 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import styles from './styles.module.scss';
 import { Button, Grid, Square, Info } from '../../components';
 
-let counter = 0;
-
 function Main({ players, setPlayerNames }) {
   const initialSquares = {
     1: '',
@@ -22,12 +20,11 @@ function Main({ players, setPlayerNames }) {
   };
   const [squares, setSquares] = useState(initialSquares);
 
-  // const symbolFirst = players.first.name[0].toUpperCase();
-  // const symbolSecond = players.second.name[0].toUpperCase();
-
   const level = Object.values(squares).filter((item) => item !== '').length;
 
   let turn = '';
+
+  let counter = players.first.score + players.second.score;
 
   if (level === 0) {
     turn = counter % 2 === 0 ? players.first.name : players.second.name;
@@ -79,7 +76,7 @@ function Main({ players, setPlayerNames }) {
     counter += 1;
     draw = true;
   }
-
+  console.log(counter);
   const navigate = useNavigate();
   return (
     <main className={styles.main}>
@@ -111,7 +108,6 @@ function Main({ players, setPlayerNames }) {
           type="button"
           text="New"
           onClick={() => {
-            counter = 0;
             setSquares(initialSquares);
             setPlayerNames('', '');
             navigate('/', { replace: true });
