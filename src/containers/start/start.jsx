@@ -56,10 +56,13 @@ function Start({ setPlayerNames }) {
               value: /^[A-Z][A-Z0-9._-]+$/gi,
               message: '* First letter must English',
             },
+            validate: (value) =>
+              value !== document.getElementById('firstPlayer').value,
           })}
         />
         <p className={theme === 'light' ? styles.errorLight : styles.errorDark}>
           {errors.secondPlayer && errors.secondPlayer.message}
+          {errors.secondPlayer?.type === 'validate' && '* Names must different'}
         </p>
       </div>
 
