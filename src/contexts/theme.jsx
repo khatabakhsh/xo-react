@@ -10,7 +10,9 @@ import React, {
 const ThemeContext = createContext(undefined);
 
 function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState(
+    window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  );
 
   const toggleThemeMode = useCallback(() => {
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
