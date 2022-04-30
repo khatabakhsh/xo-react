@@ -22,23 +22,25 @@ function Main({ players, setPlayerNames }) {
   };
   const [squares, setSquares] = useState(initialSquares);
 
-  const symbolFirst = players.first.name[0].toUpperCase();
-  const symbolSecond = players.second.name[0].toUpperCase();
+  // const symbolFirst = players.first.name[0].toUpperCase();
+  // const symbolSecond = players.second.name[0].toUpperCase();
 
   const level = Object.values(squares).filter((item) => item !== '').length;
 
   let turn = '';
 
   if (level === 0) {
-    turn = counter % 2 === 0 ? symbolFirst : symbolSecond;
+    turn = counter % 2 === 0 ? players.first.name : players.second.name;
   } else if (counter % 2 === 0) {
-    turn = level % 2 === 0 ? symbolFirst : symbolSecond;
+    turn = level % 2 === 0 ? players.first.name : players.second.name;
   } else {
-    turn = level % 2 === 1 ? symbolFirst : symbolSecond;
+    turn = level % 2 === 1 ? players.first.name : players.second.name;
   }
 
   const changeTurn = () => {
-    turn === symbolFirst ? (turn = symbolSecond) : (turn = symbolFirst);
+    turn === players.first.name
+      ? (turn = players.second.name)
+      : (turn = players.first.name);
   };
 
   let draw = false;
@@ -70,7 +72,7 @@ function Main({ players, setPlayerNames }) {
   if (win) {
     counter += 1;
     changeTurn();
-    turn === symbolFirst
+    turn === players.first.name
       ? (players.first.score += 1)
       : (players.second.score += 1);
   } else if (level === 9) {
@@ -81,23 +83,17 @@ function Main({ players, setPlayerNames }) {
   const navigate = useNavigate();
   return (
     <main className={styles.main}>
-      <Info
-        players={players}
-        turn={turn}
-        symbolFirst={symbolFirst}
-        win={win}
-        draw={draw}
-      />
+      <Info players={players} turn={turn} win={win} draw={draw} />
       <Grid>
         {Object.keys(squares).map((squareIndex) => {
           return (
             <Square
-              letter={squares[squareIndex]}
+              squares={squares}
               setSquares={setSquares}
               index={Number(squareIndex)}
               turn={turn}
-              symbolFirst={symbolFirst}
               win={win}
+              firstPlayerName={players.first.name}
               // don't use index of map. squareIndex is string and unique.
               key={squareIndex}
             />

@@ -4,7 +4,7 @@ import React from 'react';
 import styles from './styles.module.scss';
 import { useTheme } from '../../contexts/theme';
 
-function Info({ players, turn, symbolFirst, win, draw }) {
+function Info({ players, turn, win, draw }) {
   const { theme } = useTheme();
   return (
     <div className={styles.container}>
@@ -19,7 +19,7 @@ function Info({ players, turn, symbolFirst, win, draw }) {
       </div>
       <div
         className={`${styles.turn} ${
-          turn === symbolFirst ? styles.firstTurn : styles.secondTurn
+          turn === players.first.name ? styles.firstTurn : styles.secondTurn
         } ${
           !win && draw
             ? theme === 'light'
@@ -28,11 +28,13 @@ function Info({ players, turn, symbolFirst, win, draw }) {
             : ''
         } ${win ? styles.win : ''}`}
       >
-        {!win && !draw ? `${turn} Turn` : ''}
+        {!win && !draw ? `${turn[0].toUpperCase()} Turn` : ''}
         {!win && draw ? 'draw' : ''}
         {win
           ? `${
-              turn === symbolFirst ? players.first.name : players.second.name
+              turn === players.first.name
+                ? players.first.name
+                : players.second.name
             } won`
           : ''}
       </div>
