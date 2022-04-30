@@ -111,6 +111,7 @@ function Main({ players, setPlayerNames }) {
           type="button"
           text="New"
           onClick={() => {
+            counter = 0;
             setSquares(initialSquares);
             setPlayerNames('', '');
             navigate('/', { replace: true });
