@@ -76,7 +76,7 @@ function Main({ players, setPlayerNames }) {
     counter += 1;
     draw = true;
   }
-  console.log(counter);
+
   const navigate = useNavigate();
   return (
     <main className={styles.main}>
