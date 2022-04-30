@@ -1,4 +1,4 @@
-@import '../../assets/sass/_variables.scss';
+@import '../../assets/sass/variables';
 
 .footer {
   font-size: 15px;
@@ -8,15 +8,21 @@
   align-items: center;
 }
 
-.small {
+.smallLight {
   font-family: 'ComfortaaMedium', cursive;
-  a {
-    color: $textColor;
-    text-decoration: none;
-  }
+  text-decoration: none;
+  color: $text-light;
+}
+.smallDark {
+  @extend .smallLight;
+  color: $text-dark;
 }
 @supports (font-variation-settings: normal) {
-  .small {
+  .smallLight {
+    font-family: 'ComfortaaV', cursive;
+    font-variation-settings: 'wght' 500;
+  }
+  .smallDark {
     font-family: 'ComfortaaV', cursive;
     font-variation-settings: 'wght' 500;
   }

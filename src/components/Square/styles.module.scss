@@ -1,7 +1,6 @@
-@import '../../assets/sass/_variables.scss';
-@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@700&display=swap');
+@import '../../assets/sass/variables';
 
-.span {
+.spanLight {
   font-family: 'MeriendaBold', cursive !important;
   font-size: 60px;
   cursor: pointer;
@@ -11,13 +10,18 @@
   border-radius: 35px;
   width: 100px;
   height: 100px;
-  background-color: #ffffff;
-  box-shadow: $boxShadow;
+  background-color: $bg-lighter;
+  box-shadow: $box-light;
+}
+.spanDark {
+  @extend .spanLight;
+  background-color: $bg-dark;
+  box-shadow: $box-dark;
 }
 
 .firstPlayer {
-  color: $firstPlayer;
+  color: $first-player;
 }
 .secondPlayer {
-  color: $secondPlayer;
+  color: $second-player;
 }

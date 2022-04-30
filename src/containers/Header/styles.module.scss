@@ -1,14 +1,31 @@
-@import '../../assets/sass/_variables.scss';
+@import '../../assets/sass/variables';
 
-.header {
+.headerLight {
   width: 310px;
   height: 9vh;
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  border-bottom: 1px dashed rgba($textColor, 0.3);
+  border-bottom: 1px dashed rgba($text-light, 0.3);
 }
-.h1 {
+.headerDark {
+  @extend .headerLight;
+  border-bottom: 1px dashed rgba($text-dark, 0.3);
+}
+
+.h1Light {
   font-size: 25px;
-  color: $textColor;
+  color: $text-light;
+}
+.h1Dark {
+  @extend .h1Light;
+  color: $text-dark;
+}
+
+.img {
+  width: 35px;
+  height: 35px;
+  padding: 4px;
+  cursor: pointer;
 }

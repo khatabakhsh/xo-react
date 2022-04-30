@@ -2,10 +2,22 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styles from './styles.module.scss';
+import { useTheme } from '../../contexts/theme';
 
-function Button({ type, text, onClick }) {
+function Button({ type, text, color, onClick }) {
+  const { theme } = useTheme();
+  let bgColor = null;
+  if (color === 'orange') {
+    bgColor = theme === 'light' ? styles.orangeLight : styles.orangeDark;
+  } else {
+    bgColor = theme === 'light' ? styles.blueLight : styles.blueDark;
+  }
   return (
-    <button className={styles.button} type={type} onClick={onClick}>
+    <button
+      className={`${styles.button} ${bgColor}`}
+      type={type}
+      onClick={onClick}
+    >
       {text}
     </button>
   );

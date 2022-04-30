@@ -1,14 +1,30 @@
-@import '../../assets/sass/_variables.scss';
+@import '../../assets/sass/variables';
 
 .button {
   font-size: 17px;
   width: 33%;
   height: 40px;
   cursor: pointer;
-  background-color: $buttonColor;
-  color: rgb(245, 245, 245);
+  color: $text-dark;
   border: none;
   border-radius: 25px;
   padding: 5px 15px;
-  box-shadow: $boxShadow;
+}
+
+.blueLight {
+  background-color: $button-blue-bg-light;
+  box-shadow: $box-light;
+}
+.blueDark {
+  background-color: $button-blue-bg-dark;
+  box-shadow: $box-dark;
+}
+
+.orangeLight {
+  background-color: $button-orange-bg-light;
+  box-shadow: $box-light;
+}
+.orangeDark {
+  background-color: $button-orange-bg-dark;
+  box-shadow: $box-dark;
 }
