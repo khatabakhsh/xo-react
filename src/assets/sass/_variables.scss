@@ -6,17 +6,18 @@ $bg-dark: #484c4f;
 $middle-light: #606060;
 $middle-dark: #c9cacc;
 
-$text-light: #ffffff;
-$text-dark: #333333;
+$text-light: #333333;
+$text-dark: #eeeeee;
 
-$button-bg: #ff9933;
 $button-blue-bg-light: #1a73e9;
 $button-blue-bg-dark: #5f97f6;
+$button-orange-bg-light: #ff9933;
+$button-orange-bg-dark: #f19f4c;
 
-$box-light: rgba($text-dark, 0.3) 0px 1px 2px 0px,
-  rgba($text-dark, 0.15) 0px 1px 3px 1px;
-$box-dark: rgba($text-light, 0.3) 0px 1px 2px 0px,
+$box-light: rgba($text-light, 0.3) 0px 1px 2px 0px,
   rgba($text-light, 0.15) 0px 1px 3px 1px;
+$box-dark: rgba(0, 0, 0, 0.3) 0px 1px 2px 0px,
+  rgba(0, 0, 0, 0.15) 0px 1px 3px 1px;
 
 $first-player: #26a69a;
 $second-player: #ef5350;

@@ -108,6 +108,7 @@ function Main({ players, setPlayerNames }) {
         <Button
           type="button"
           text="Clear"
+          color="orange"
           onClick={() => setSquares(initialSquares)}
         />
         <Button

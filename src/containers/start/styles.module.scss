@@ -12,33 +12,40 @@
     margin: 12px auto;
   }
   input[name='firstPlayer'] {
-    color: $firstPlayer;
-    caret-color: $firstPlayer;
+    color: $first-player;
+    caret-color: $first-player;
     @include webkitAutofill {
       transition: background-color 5000s ease-in-out 0s;
-      -webkit-text-fill-color: $firstPlayer;
+      -webkit-text-fill-color: $first-player;
     }
   }
   input[name='secondPlayer'] {
-    color: $secondPlayer;
-    caret-color: $secondPlayer;
+    color: $second-player;
+    caret-color: $second-player;
     @include webkitAutofill {
       transition: background-color 5000s ease-in-out 0s;
-      -webkit-text-fill-color: $secondPlayer;
+      -webkit-text-fill-color: $second-player;
     }
   }
 }
-.error {
+.errorLight {
   font-family: 'ComfortaaMedium';
   font-size: 13px;
-  color: $buttonColor;
   height: 13px;
   align-self: flex-start;
   margin: 1px 5px;
   padding-top: 3px;
+  color: $button-blue-bg-light;
+}
+.errorDark {
+  @extend .errorLight;
+  color: $button-blue-bg-dark;
 }
 @supports (font-variation-settings: normal) {
-  .error {
+  .errorLight {
+    font-variation-settings: 'wght' 500;
+  }
+  .errorDark {
     font-variation-settings: 'wght' 500;
   }
 }

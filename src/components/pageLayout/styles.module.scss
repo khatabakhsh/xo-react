@@ -1,10 +1,14 @@
-@import '../../assets/sass/_mixins.scss';
+@import '../../assets/sass/variables';
 
-.div {
+.divLight {
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(245, 245, 245);
+  background-color: $bg-light;
+}
+.divDark {
+  @extend .divLight;
+  background-color: $bg-darker;
 }

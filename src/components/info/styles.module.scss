@@ -8,44 +8,65 @@
   align-items: center;
   gap: 15px;
 }
-.players {
+
+.playersLight {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   font-size: 20px;
-  color: $textColor;
+  color: $text-light;
 }
+.playersDark {
+  @extend .playersLight;
+  color: $text-dark;
+}
+
 .player {
   font-size: 17px;
   width: 38%;
   text-align: center;
 }
-.scores {
-  background-color: #ffffff;
+
+.scoresLight {
   border-radius: 25px;
   padding: 8px 12px 5px 12px;
-  box-shadow: $boxShadow;
   text-align: center;
   width: 24%;
+  color: $text-light;
+  background-color: $bg-lighter;
+  box-shadow: $box-light;
 }
+.scoresDark {
+  @extend .scoresLight;
+  color: $text-dark;
+  background-color: $bg-dark;
+  box-shadow: $box-dark;
+}
+
 .turn {
   margin-left: 20px;
   margin-right: 20px;
 }
 .firstTurn {
   align-self: flex-start;
-  color: $firstPlayer;
+  color: $first-player;
 }
 .secondTurn {
   align-self: flex-end;
-  color: $secondPlayer;
+  color: $second-player;
 }
-.draw {
+
+.drawLight {
   align-self: inherit;
-  color: gray;
+  color: $middle-light;
 }
+.drawDark {
+  @extend .drawLight;
+  color: $middle-dark;
+}
+
 .win {
   align-self: inherit;
 }

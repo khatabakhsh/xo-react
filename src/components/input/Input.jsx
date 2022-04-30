@@ -2,17 +2,21 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styles from './styles.module.scss';
+import { useTheme } from '../../contexts/theme';
 
-// function Input({ label, type, id, rhf }) {
 function Input({ label, name, type, register }) {
+  const { theme } = useTheme();
   return (
     <div>
-      <label className={styles.label} htmlFor={name}>
+      <label
+        className={theme === 'light' ? styles.labelLight : styles.labelDark}
+        htmlFor={name}
+      >
         {label}
       </label>
       <input
         spellCheck="false"
-        className={styles.input}
+        className={theme === 'light' ? styles.inputLight : styles.inputDark}
         type={type}
         id={name}
         name={name}

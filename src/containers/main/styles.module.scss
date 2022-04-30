@@ -1,3 +1,5 @@
+@import '../../assets/sass/variables';
+
 .main {
   height: 84vh;
   display: flex;
@@ -13,10 +15,4 @@
   justify-content: space-around;
   align-items: center;
   margin: 20px auto;
-
-  button {
-    &:first-child {
-      background-color: #2962ff !important;
-    }
-  }
 }

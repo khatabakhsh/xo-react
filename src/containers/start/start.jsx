@@ -4,6 +4,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import styles from './styles.module.scss';
+import { useTheme } from '../../contexts/theme';
 import { Input, Button } from '../../components';
 
 function Start({ setPlayerNames }) {
@@ -12,12 +13,15 @@ function Start({ setPlayerNames }) {
     formState: { errors },
     handleSubmit,
   } = useForm();
+
   const navigate = useNavigate();
+
   const onSubmit = (data) => {
     setPlayerNames(data.firstPlayer, data.secondPlayer);
     navigate('/game', { replace: true });
   };
 
+  const { theme } = useTheme();
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <div>
@@ -35,7 +39,7 @@ function Start({ setPlayerNames }) {
             },
           })}
         />
-        <p className={styles.error}>
+        <p className={theme === 'light' ? styles.errorLight : styles.errorDark}>
           {errors.firstPlayer && errors.firstPlayer.message}
         </p>
       </div>
@@ -54,7 +58,7 @@ function Start({ setPlayerNames }) {
             },
           })}
         />
-        <p className={styles.error}>
+        <p className={theme === 'light' ? styles.errorLight : styles.errorDark}>
           {errors.secondPlayer && errors.secondPlayer.message}
         </p>
       </div>
