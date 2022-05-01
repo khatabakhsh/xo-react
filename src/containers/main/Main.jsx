@@ -7,10 +7,13 @@ import styles from './styles.module.scss';
 import { Button, Grid, Square, Info } from '../../components';
 import { useLang } from '../../hooks';
 
-function Main({ title, players, setPlayerNames }) {
+function Main({ players, setPlayerNames }) {
+  const { lang } = useLang();
+
   useEffect(() => {
-    document.title = `Tic-Tac-Toe : ${title}`;
-  }, []);
+    document.title =
+      lang === 'en' ? 'Tic-Tac-Toe : Playing' : 'بازی دوز : در حال بازی';
+  }, [lang]);
 
   const initialSquares = {
     1: '',
@@ -101,7 +104,6 @@ function Main({ title, players, setPlayerNames }) {
   }, [squares]);
 
   const navigate = useNavigate();
-  const { lang } = useLang();
 
   return (
     <main className={styles.main}>

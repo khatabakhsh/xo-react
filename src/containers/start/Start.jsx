@@ -7,12 +7,13 @@ import styles from './styles.module.scss';
 import { useTheme, useLang } from '../../hooks';
 import { Input, Button } from '../../components';
 
-function Start({ title, setPlayerNames }) {
-  useEffect(() => {
-    document.title = `Tic-Tac-Toe : ${title}`;
-  }, []);
-
+function Start({ setPlayerNames }) {
   const { lang } = useLang();
+
+  useEffect(() => {
+    document.title =
+      lang === 'en' ? `Tic-Tac-Toe : Let's Play` : 'بازی دوز : بیا شروع کنیم';
+  }, [lang]);
 
   const {
     register,
