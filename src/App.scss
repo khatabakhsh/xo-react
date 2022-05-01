@@ -1,24 +1,24 @@
 @font-face {
   font-family: MeriendaBold;
   src: url('./assets/fonts/Merienda/Bold.ttf');
+  font-display: block;
 }
 //////////////////////////////////////////////
 @font-face {
   font-family: ComfortaaV;
-  src: url('./assets/fonts/Comfortaa/Comfortaa-VariableFont_wght.ttf'),
-    /* will be the standard and works in Safari now */
-      url('./assets/fonts/Comfortaa/Comfortaa-VariableFont_wght.ttf');
-  /* for the other supporting browsers */
+  src: url('./assets/fonts/Comfortaa/Comfortaa-VariableFont_wght.ttf');
   font-weight: 300 700;
-  font-display: fallback;
+  font-display: block;
 }
 @font-face {
   font-family: ComfortaaBold;
   src: url('./assets/fonts/Comfortaa/Comfortaa-Bold.ttf');
+  font-display: block;
 }
 @font-face {
   font-family: ComfortaaMedium;
   src: url('./assets/fonts/Comfortaa/Comfortaa-Medium.ttf');
+  font-display: block;
 }
 //////////////////////////////////////////////
 body,
