@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import './assets/sass/reset.scss';
 import { ThemeProvider } from './contexts/theme';
+import { LanguageProvider } from './contexts/language';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
@@ -10,7 +11,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <ThemeProvider>
-      <App />
+      <LanguageProvider>
+        <App />
+      </LanguageProvider>
     </ThemeProvider>
   </BrowserRouter>
 );
