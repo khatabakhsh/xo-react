@@ -29,7 +29,7 @@
   }
 }
 .errorLight {
-  font-family: 'ComfortaaMedium';
+  font-weight: 500 !important;
   font-size: 13px;
   height: 13px;
   align-self: flex-start;
@@ -40,12 +40,4 @@
 .errorDark {
   @extend .errorLight;
   color: $button-blue-bg-dark;
-}
-@supports (font-variation-settings: normal) {
-  .errorLight {
-    font-variation-settings: 'wght' 500;
-  }
-  .errorDark {
-    font-variation-settings: 'wght' 500;
-  }
 }

@@ -9,21 +9,11 @@
 }
 
 .smallLight {
-  font-family: 'ComfortaaMedium', cursive;
+  font-weight: 400 !important;
   text-decoration: none;
   color: $text-light;
 }
 .smallDark {
   @extend .smallLight;
   color: $text-dark;
-}
-@supports (font-variation-settings: normal) {
-  .smallLight {
-    font-family: 'ComfortaaV', cursive;
-    font-variation-settings: 'wght' 500;
-  }
-  .smallDark {
-    font-family: 'ComfortaaV', cursive;
-    font-variation-settings: 'wght' 500;
-  }
 }
