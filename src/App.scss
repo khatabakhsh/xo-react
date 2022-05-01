@@ -103,3 +103,8 @@ body,
   font-family: 'Comfortaa';
   font-weight: 700;
 }
+body {
+  // remove browser addressbar on mobile
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+}
