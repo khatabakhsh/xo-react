@@ -1,12 +1,16 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-expressions */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './styles.module.scss';
 import { Button, Grid, Square, Info } from '../../components';
 
-function Main({ players, setPlayerNames }) {
+function Main({ title, players, setPlayerNames }) {
+  useEffect(() => {
+    document.title = `Tic-Tac-Toe : ${title}`;
+  }, []);
+
   const initialSquares = {
     1: '',
     2: '',

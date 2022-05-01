@@ -1,13 +1,17 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import styles from './styles.module.scss';
 import { useTheme } from '../../contexts/theme';
 import { Input, Button } from '../../components';
 
-function Start({ setPlayerNames }) {
+function Start({ title, setPlayerNames }) {
+  useEffect(() => {
+    document.title = `Tic-Tac-Toe : ${title}`;
+  }, []);
+
   const {
     register,
     formState: { errors },
