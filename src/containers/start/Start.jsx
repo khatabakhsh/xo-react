@@ -4,13 +4,15 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import styles from './styles.module.scss';
-import { useTheme } from '../../hooks';
+import { useTheme, useLang } from '../../hooks';
 import { Input, Button } from '../../components';
 
 function Start({ title, setPlayerNames }) {
   useEffect(() => {
     document.title = `Tic-Tac-Toe : ${title}`;
   }, []);
+
+  const { lang } = useLang();
 
   const {
     register,
@@ -30,47 +32,103 @@ function Start({ title, setPlayerNames }) {
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <div>
         <Input
-          label="First Player"
+          label={lang === 'en' ? 'First Player' : 'بازیکن اول'}
           name="firstPlayer"
           type="text"
+          placeholder="Amir"
           register={register('firstPlayer', {
-            required: { value: true, message: '* Name required' },
-            minLength: { value: 2, message: '* Name minimum 2 letters' },
-            maxLength: { value: 9, message: '* Name maximum 9 letters' },
-            pattern: {
-              value: /^[A-Z][A-Z0-9._-]+$/gi,
-              message: '* First letter must English',
-            },
+            required: true,
+            minLength: 2,
+            maxLength: 9,
+            pattern: /^[A-Z][A-Z0-9._-]+$/gi,
           })}
         />
         <p className={theme === 'light' ? styles.errorLight : styles.errorDark}>
-          {errors.firstPlayer && errors.firstPlayer.message}
+          {errors.firstPlayer?.type === 'required' &&
+            `${
+              lang === 'en' ? '* Name required' : 'وارد کردن اسم الزامی است *'
+            }`}
+          {errors.firstPlayer?.type === 'minLength' &&
+            `${
+              lang === 'en'
+                ? '* Name minimum 2 letters'
+                : 'کمترین مقدار 2 حرف است *'
+            }`}
+          {errors.firstPlayer?.type === 'maxLength' &&
+            `${
+              lang === 'en'
+                ? '* Name maximum 2 letters'
+                : 'بیشترین مقدار 9 حرف است *'
+            }`}
+          {errors.firstPlayer?.type === 'pattern' &&
+            `${
+              lang === 'en'
+                ? '* Name must in English'
+                : 'اسم باید به انگلیسی باشد *'
+            }`}
         </p>
       </div>
       <div>
         <Input
-          label="Second Player"
+          label={lang === 'en' ? 'Second Player' : 'بازیکن دوم'}
           name="secondPlayer"
           type="text"
+          placeholder="Hossein"
           register={register('secondPlayer', {
-            required: { value: true, message: '* Name required' },
-            minLength: { value: 2, message: '* Name minimum 2 letters' },
-            maxLength: { value: 9, message: '* Name maximum 9 letters' },
-            pattern: {
-              value: /^[A-Z][A-Z0-9._-]+$/gi,
-              message: '* First letter must English',
-            },
+            required: true,
+            minLength: 2,
+            maxLength: 9,
+            pattern: /^[A-Z][A-Z0-9._-]+$/gi,
             validate: (value) =>
               value !== document.getElementById('firstPlayer').value,
           })}
         />
         <p className={theme === 'light' ? styles.errorLight : styles.errorDark}>
-          {errors.secondPlayer && errors.secondPlayer.message}
-          {errors.secondPlayer?.type === 'validate' && '* Names must different'}
+          {errors.secondPlayer?.type === 'required' &&
+            `${
+              lang === 'en' ? '* Name required' : 'وارد کردن اسم الزامی است *'
+            }`}
+          {errors.secondPlayer?.type === 'minLength' &&
+            `${
+              lang === 'en'
+                ? '* Name minimum 2 letters'
+                : 'کمترین مقدار 2 حرف است *'
+            }`}
+          {errors.secondPlayer?.type === 'maxLength' &&
+            `${
+              lang === 'en'
+                ? '* Name maximum 2 letters'
+                : 'بیشترین مقدار 9 حرف است *'
+            }`}
+          {errors.secondPlayer?.type === 'pattern' &&
+            `${
+              lang === 'en'
+                ? '* Name must in English'
+                : 'اسم باید به انگلیسی باشد *'
+            }`}
+          {errors.secondPlayer?.type === 'validate' &&
+            `${
+              lang === 'en'
+                ? '* Names must different'
+                : 'اسم‌ها باید متفاوت باشند *'
+            }`}
         </p>
       </div>
 
-      <Button text="Start Play" type="submit" />
+      <Button text={lang === 'en' ? 'Start Play' : 'شروع بازی'} type="submit" />
+
+      <style jsx="true">{`
+        ${lang === 'en'
+          ? ''
+          : `p {
+        font-family: 'IRANSansX';
+        font-weight: 300;
+        text-align: right !important;
+        -moz-font-feature-settings: "ss02";
+        -webkit-font-feature-settings: "ss02";
+        font-feature-settings: "ss02";
+      }`}
+      `}</style>
     </form>
   );
 }
