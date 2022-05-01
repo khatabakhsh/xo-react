@@ -26,9 +26,15 @@
   &::grammar-error {
     text-decoration: none;
   }
+  &::placeholder {
+    color: $middle-dark;
+  }
 }
 .inputDark {
   @extend .inputLight;
   background-color: $bg-dark;
   box-shadow: $box-dark;
+  &::placeholder {
+    color: $middle-light;
+  }
 }
