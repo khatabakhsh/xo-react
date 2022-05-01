@@ -2,12 +2,20 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styles from './styles.module.scss';
-import { useTheme } from '../../hooks';
+import { useTheme, useLang } from '../../hooks';
 
 function Info({ players, turn, win, draw }) {
   const { theme } = useTheme();
+  const { lang } = useLang();
+
+  const CONTENT = {
+    TURN: lang === 'en' ? 'Turn' : 'نوبت',
+    WIN:
+      lang === 'en' ? `${turn} won this level` : `برنده این مرحله بود ${turn}`,
+    DRAW: lang === 'en' ? 'Draw !' : '! مساوی',
+  };
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <div
         className={theme === 'light' ? styles.playersLight : styles.playersDark}
       >
@@ -18,7 +26,7 @@ function Info({ players, turn, win, draw }) {
         <span className={styles.player}>{players.second.name}</span>
       </div>
       <div
-        className={`${styles.turn} ${
+        className={`turn ${styles.turn} ${
           turn === players.first.name ? styles.firstTurn : styles.secondTurn
         } ${
           !win && draw
@@ -26,19 +34,21 @@ function Info({ players, turn, win, draw }) {
               ? styles.drawLight
               : styles.drawDark
             : ''
-        } ${win ? styles.win : ''}`}
+        } ${win && styles.win}`}
       >
-        {!win && !draw ? `${turn[0].toUpperCase()} Turn` : ''}
-        {!win && draw ? 'draw' : ''}
-        {win
-          ? `${
-              turn === players.first.name
-                ? players.first.name
-                : players.second.name
-            } won`
-          : ''}
+        {!win && !draw ? `${turn[0].toUpperCase()} ${CONTENT.TURN}` : ''}
+        {!win && draw ? CONTENT.DRAW : ''}
+        {win && CONTENT.WIN}
+
+        <style jsx="true">{`
+          ${lang === 'fa' &&
+          `.turn {
+            font-family: IRANSansX;
+            font-weight: normal;
+          }`}
+        `}</style>
       </div>
-    </div>
+    </section>
   );
 }
 

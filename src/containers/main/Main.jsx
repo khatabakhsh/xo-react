@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './styles.module.scss';
 import { Button, Grid, Square, Info } from '../../components';
+import { useLang } from '../../hooks';
 
 function Main({ title, players, setPlayerNames }) {
   useEffect(() => {
@@ -44,44 +45,64 @@ function Main({ title, players, setPlayerNames }) {
       : (turn = players.first.name);
   };
 
-  let draw = false;
+  const [win, setWin] = useState(false);
+  const [draw, setDraw] = useState(false);
 
-  const horizontalFirst =
-    squares[1] === squares[2] && squares[2] === squares[3] && squares[2] !== '';
-  const horizontalSecond =
-    squares[4] === squares[5] && squares[5] === squares[6] && squares[5] !== '';
-  const horizontalThird =
-    squares[7] === squares[8] && squares[8] === squares[9] && squares[8] !== '';
-  const horizontal = horizontalFirst || horizontalSecond || horizontalThird;
+  useEffect(() => {
+    const horizontalFirst =
+      squares[1] === squares[2] &&
+      squares[2] === squares[3] &&
+      squares[2] !== '';
+    const horizontalSecond =
+      squares[4] === squares[5] &&
+      squares[5] === squares[6] &&
+      squares[5] !== '';
+    const horizontalThird =
+      squares[7] === squares[8] &&
+      squares[8] === squares[9] &&
+      squares[8] !== '';
+    const horizontal = horizontalFirst || horizontalSecond || horizontalThird;
 
-  const verticalFirst =
-    squares[1] === squares[4] && squares[4] === squares[7] && squares[4] !== '';
-  const verticalSecond =
-    squares[2] === squares[5] && squares[5] === squares[8] && squares[5] !== '';
-  const verticalThird =
-    squares[3] === squares[6] && squares[6] === squares[9] && squares[6] !== '';
-  const vertical = verticalFirst || verticalSecond || verticalThird;
+    const verticalFirst =
+      squares[1] === squares[4] &&
+      squares[4] === squares[7] &&
+      squares[4] !== '';
+    const verticalSecond =
+      squares[2] === squares[5] &&
+      squares[5] === squares[8] &&
+      squares[5] !== '';
+    const verticalThird =
+      squares[3] === squares[6] &&
+      squares[6] === squares[9] &&
+      squares[6] !== '';
+    const vertical = verticalFirst || verticalSecond || verticalThird;
 
-  const diagonalFirst =
-    squares[1] === squares[5] && squares[5] === squares[9] && squares[5] !== '';
-  const diagonalSecond =
-    squares[3] === squares[5] && squares[5] === squares[7] && squares[5] !== '';
-  const diagonal = diagonalFirst || diagonalSecond;
+    const diagonalFirst =
+      squares[1] === squares[5] &&
+      squares[5] === squares[9] &&
+      squares[5] !== '';
+    const diagonalSecond =
+      squares[3] === squares[5] &&
+      squares[5] === squares[7] &&
+      squares[5] !== '';
+    const diagonal = diagonalFirst || diagonalSecond;
 
-  const win = horizontal || vertical || diagonal;
-
-  if (win) {
-    counter += 1;
-    changeTurn();
-    turn === players.first.name
-      ? (players.first.score += 1)
-      : (players.second.score += 1);
-  } else if (level === 9) {
-    counter += 1;
-    draw = true;
-  }
+    if (horizontal || vertical || diagonal) {
+      setWin(true);
+      counter += 1;
+      changeTurn();
+      turn === players.first.name
+        ? (players.first.score += 1)
+        : (players.second.score += 1);
+    } else if (level === 9) {
+      counter += 1;
+      setDraw(true);
+    }
+  }, [squares]);
 
   const navigate = useNavigate();
+  const { lang } = useLang();
+
   return (
     <main className={styles.main}>
       <Info players={players} turn={turn} win={win} draw={draw} />
@@ -101,23 +122,36 @@ function Main({ title, players, setPlayerNames }) {
           );
         })}
       </Grid>
-      <div className={styles.buttons}>
+      <section className={`${styles.buttons} buttons`}>
         <Button
           type="button"
-          text="Clear"
+          text={lang === 'en' ? 'Clear' : 'پاک کردن'}
           color="orange"
-          onClick={() => setSquares(initialSquares)}
+          onClick={() => {
+            setSquares(initialSquares);
+            setWin(false);
+            setDraw(false);
+          }}
         />
         <Button
           type="button"
-          text="New"
+          text={lang === 'en' ? 'New Play' : 'بازی جدید'}
           onClick={() => {
             setSquares(initialSquares);
+            setWin(false);
+            setDraw(false);
             setPlayerNames('', '');
             navigate('/', { replace: true });
           }}
         />
-      </div>
+        <style jsx="true">{`
+          ${lang === 'en'
+            ? ''
+            : `.buttons {
+                flex-direction: row-reverse !important;
+              }`}
+        `}</style>
+      </section>
     </main>
   );
 }
