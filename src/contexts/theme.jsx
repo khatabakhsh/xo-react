@@ -1,11 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-} from 'react';
+import React, { createContext, useCallback, useMemo, useState } from 'react';
 
 const ThemeContext = createContext(undefined);
 
@@ -28,13 +22,4 @@ function ThemeProvider({ children }) {
   );
 }
 
-const useTheme = () => {
-  const context = useContext(ThemeContext);
-
-  if (context === undefined)
-    throw new Error('useTheme must be within ThemeProvider!');
-
-  return context;
-};
-
-export { ThemeProvider, useTheme };
+export { ThemeProvider, ThemeContext };

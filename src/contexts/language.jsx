@@ -1,11 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-} from 'react';
+import React, { createContext, useCallback, useMemo, useState } from 'react';
 
 const LanguageContext = createContext(undefined);
 
@@ -13,7 +7,7 @@ function LanguageProvider({ children }) {
   const [lang, setLang] = useState('en');
 
   const changeLang = useCallback(() => {
-    setLang((prev) => (prev === 'light' ? 'dark' : 'light'));
+    setLang((prev) => (prev === 'en' ? 'fa' : 'en'));
   }, []);
 
   const value = useMemo(() => ({ changeLang, lang }), [lang, changeLang]);
@@ -25,13 +19,4 @@ function LanguageProvider({ children }) {
   );
 }
 
-const useLang = () => {
-  const context = useContext(LanguageContext);
-
-  if (context === undefined)
-    throw new Error('useLang must be within LanguageProvider!');
-
-  return context;
-};
-
-export { LanguageProvider, useLang };
+export { LanguageProvider, LanguageContext };
