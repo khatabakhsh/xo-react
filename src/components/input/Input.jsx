@@ -2,10 +2,11 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styles from './styles.module.scss';
-import { useTheme } from '../../hooks';
+import { useTheme, useLang } from '../../hooks';
 
-function Input({ label, name, type, register }) {
+function Input({ label, name, type, placeholder, register }) {
   const { theme } = useTheme();
+  const { lang } = useLang();
   return (
     <div>
       <label
@@ -20,8 +21,19 @@ function Input({ label, name, type, register }) {
         type={type}
         id={name}
         name={name}
+        placeholder={placeholder}
         {...register}
       />
+
+      <style jsx="true">{`
+        ${lang === 'en'
+          ? ''
+          : `label {
+        font-family: 'IRANSansX';
+        font-weight: 500;
+        text-align: right !important;
+      }`}
+      `}</style>
     </div>
   );
 }

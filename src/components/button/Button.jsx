@@ -2,10 +2,11 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styles from './styles.module.scss';
-import { useTheme } from '../../hooks';
+import { useTheme, useLang } from '../../hooks';
 
 function Button({ type, text, color, onClick }) {
   const { theme } = useTheme();
+  const { lang } = useLang();
   let bgColor = null;
   if (color === 'orange') {
     bgColor = theme === 'light' ? styles.orangeLight : styles.orangeDark;
@@ -19,6 +20,15 @@ function Button({ type, text, color, onClick }) {
       onClick={onClick}
     >
       {text}
+
+      <style jsx="true">{`
+        ${lang === 'en'
+          ? ''
+          : `button {
+        font-family: 'IRANSansX';
+        font-weight: 500;
+      }`}
+      `}</style>
     </button>
   );
 }

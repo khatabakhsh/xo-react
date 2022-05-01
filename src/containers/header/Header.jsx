@@ -31,6 +31,15 @@ function Header() {
         className={styles.img}
         onClick={() => changeLang()}
       />
+
+      <style jsx="true">{`
+        ${lang === 'en'
+          ? ''
+          : `h1 {
+        font-family: 'IRANSansX';
+        font-weight: bold;
+      }`}
+      `}</style>
     </header>
   );
 }
