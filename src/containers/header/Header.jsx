@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import styles from './styles.module.scss';
-import { useTheme } from '../../contexts/theme';
+import { useTheme } from '../../hooks';
 import darkMoon from '../../assets/images/dark-moon.svg';
 import lightSun from '../../assets/images/light-sun.svg';
 import languageLight from '../../assets/images/language-light.svg';

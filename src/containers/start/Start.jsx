@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import styles from './styles.module.scss';
-import { useTheme } from '../../contexts/theme';
+import { useTheme } from '../../hooks';
 import { Input, Button } from '../../components';
 
 function Start({ title, setPlayerNames }) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './styles.module.scss';
-import { useTheme } from '../../contexts/theme';
+import { useTheme } from '../../hooks';
 import githubLight from '../../assets/images/github-mark-light.png';
 import githubDark from '../../assets/images/github-mark-dark.png';
 

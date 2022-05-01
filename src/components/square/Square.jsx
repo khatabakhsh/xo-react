@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styles from './styles.module.scss';
-import { useTheme } from '../../contexts/theme';
+import { useTheme } from '../../hooks';
 
 function Square({ squares, setSquares, index, turn, win, firstPlayerName }) {
   const { theme } = useTheme();
