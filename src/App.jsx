@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.scss';
 import { PageLayout } from './components';
 import { Header, Main, Footer, Start } from './containers';
 
 function App() {
+  useEffect(() => {
+    window.scrollTo(0, 1);
+  }, []);
   const [players, setPlayers] = useState({
     first: { name: '', score: 0 },
     second: { name: '', score: 0 },
