@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import styles from './styles.module.scss';
-import { useTheme } from '../../hooks';
+import { useTheme, useLang } from '../../hooks';
 import darkMoon from '../../assets/images/dark-moon.svg';
 import lightSun from '../../assets/images/light-sun.svg';
 import languageLight from '../../assets/images/language-light.svg';
@@ -10,6 +10,7 @@ import languageDark from '../../assets/images/language-dark.svg';
 
 function Header() {
   const { theme, toggleThemeMode } = useTheme();
+  const { lang, changeLang } = useLang();
 
   return (
     <header
@@ -22,12 +23,13 @@ function Header() {
         onClick={() => toggleThemeMode()}
       />
       <h1 className={theme === 'light' ? styles.h1Light : styles.h1Dark}>
-        Tic-Tac-Toe
+        {lang === 'en' ? 'Tic-Tac-Toe' : 'بازی دوز'}
       </h1>
       <img
         src={theme === 'light' ? languageLight : languageDark}
         alt=""
         className={styles.img}
+        onClick={() => changeLang()}
       />
     </header>
   );
