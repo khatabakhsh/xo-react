@@ -48,8 +48,7 @@ function Main({ players, setPlayerNames }) {
       : (turn = players.first.name);
   };
 
-  const [win, setWin] = useState(false);
-  const [draw, setDraw] = useState(false);
+  const [status, setStatus] = useState('');
 
   useEffect(() => {
     const horizontalFirst =
@@ -91,7 +90,7 @@ function Main({ players, setPlayerNames }) {
     const diagonal = diagonalFirst || diagonalSecond;
 
     if (horizontal || vertical || diagonal) {
-      setWin(true);
+      setStatus('win');
       counter += 1;
       changeTurn();
       turn === players.first.name
@@ -99,7 +98,7 @@ function Main({ players, setPlayerNames }) {
         : (players.second.score += 1);
     } else if (level === 9) {
       counter += 1;
-      setDraw(true);
+      setStatus('draw');
     }
   }, [squares]);
 
@@ -107,7 +106,7 @@ function Main({ players, setPlayerNames }) {
 
   return (
     <main className={styles.main}>
-      <Info players={players} turn={turn} win={win} draw={draw} />
+      <Info players={players} turn={turn} status={status} />
       <Grid>
         {Object.keys(squares).map((squareIndex) => {
           return (
@@ -116,7 +115,7 @@ function Main({ players, setPlayerNames }) {
               setSquares={setSquares}
               index={Number(squareIndex)}
               turn={turn}
-              win={win}
+              status={status}
               firstPlayerName={players.first.name}
               // don't use index of map. squareIndex is string and unique.
               key={squareIndex}
@@ -131,8 +130,7 @@ function Main({ players, setPlayerNames }) {
           color="orange"
           onClick={() => {
             setSquares(initialSquares);
-            setWin(false);
-            setDraw(false);
+            setStatus('');
           }}
         />
         <Button
@@ -140,8 +138,7 @@ function Main({ players, setPlayerNames }) {
           text={lang === 'en' ? 'New Play' : 'بازی جدید'}
           onClick={() => {
             setSquares(initialSquares);
-            setWin(false);
-            setDraw(false);
+            setStatus('');
             setPlayerNames('', '');
             navigate('/', { replace: true });
           }}

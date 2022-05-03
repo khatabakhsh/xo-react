@@ -4,7 +4,7 @@ import React from 'react';
 import styles from './styles.module.scss';
 import { useTheme, useLang } from '../../hooks';
 
-function Info({ players, turn, win, draw }) {
+function Info({ players, turn, status }) {
   const { theme } = useTheme();
   const { lang } = useLang();
 
@@ -29,16 +29,16 @@ function Info({ players, turn, win, draw }) {
         className={`turn ${styles.turn} ${
           turn === players.first.name ? styles.firstTurn : styles.secondTurn
         } ${
-          !win && draw
+          status === 'draw'
             ? theme === 'light'
               ? styles.drawLight
               : styles.drawDark
             : ''
-        } ${win && styles.win}`}
+        } ${status === 'win' && styles.win}`}
       >
-        {!win && !draw ? `${turn[0].toUpperCase()} ${CONTENT.TURN}` : ''}
-        {!win && draw ? CONTENT.DRAW : ''}
-        {win && CONTENT.WIN}
+        {status === 'win' && CONTENT.WIN}
+        {status === 'draw' && CONTENT.DRAW}
+        {!status ? `${turn[0].toUpperCase()} ${CONTENT.TURN}` : ''}
 
         <style jsx="true">{`
           ${lang === 'fa' &&

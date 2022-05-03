@@ -4,10 +4,10 @@ import React from 'react';
 import styles from './styles.module.scss';
 import { useTheme } from '../../hooks';
 
-function Square({ squares, setSquares, index, turn, win, firstPlayerName }) {
+function Square({ squares, setSquares, index, turn, status, firstPlayerName }) {
   const { theme } = useTheme();
   const handleClick = () => {
-    if (squares[index] === '' && !win) {
+    if (squares[index] === '' && !status) {
       setSquares((prev) => ({ ...prev, [index]: turn }));
     }
   };
