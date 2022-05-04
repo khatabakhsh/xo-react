@@ -1,6 +1,6 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './styles.module.scss';
 import { useTheme, useLang } from '../../hooks';
 
@@ -32,4 +32,4 @@ function Button({ type, text, color, onClick }) {
     </button>
   );
 }
-export default Button;
+export default memo(Button);

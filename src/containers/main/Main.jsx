@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-expressions */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './styles.module.scss';
 import { Button, Grid, Square, Info } from '../../components';
@@ -94,15 +94,15 @@ function Main({ players, setPlayerNames }) {
     }
   }, [squares]);
 
-  const handleClear = () => {
+  const handleClear = useCallback(() => {
     setSquares(initialSquares);
     setStatus('');
     setCounter((prev) => prev + 1);
-  };
-  const handleNew = () => {
+  }, [counter]);
+  const handleNew = useCallback(() => {
     setPlayerNames('', '');
     navigate('/', { replace: true });
-  };
+  }, [players.first.name]);
 
   return (
     <main className={styles.main}>
@@ -111,7 +111,7 @@ function Main({ players, setPlayerNames }) {
         {Object.keys(squares).map((squareIndex) => {
           return (
             <Square
-              squares={squares}
+              square={squares[squareIndex]}
               setSquares={setSquares}
               index={Number(squareIndex)}
               turn={turn}
