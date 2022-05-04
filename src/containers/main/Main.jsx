@@ -9,6 +9,7 @@ import { useLang } from '../../hooks';
 
 function Main({ players, setPlayerNames }) {
   const { lang } = useLang();
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title =
@@ -27,28 +28,14 @@ function Main({ players, setPlayerNames }) {
     9: '',
   };
   const [squares, setSquares] = useState(initialSquares);
-
-  const level = Object.values(squares).filter((item) => item !== '').length;
-
-  let turn = '';
-
-  let counter = players.first.score + players.second.score;
-
-  if (level === 0) {
-    turn = counter % 2 === 0 ? players.first.name : players.second.name;
-  } else if (counter % 2 === 0) {
-    turn = level % 2 === 0 ? players.first.name : players.second.name;
-  } else {
-    turn = level % 2 === 1 ? players.first.name : players.second.name;
-  }
-
-  const changeTurn = () => {
-    turn === players.first.name
-      ? (turn = players.second.name)
-      : (turn = players.first.name);
-  };
-
   const [status, setStatus] = useState('');
+  const [turn, setTurn] = useState(players.first.name);
+  const [counter, setCounter] = useState(0);
+  const [level, setLevel] = useState(0);
+
+  useEffect(() => {
+    counter % 2 === 0 ? setLevel(0) : setLevel(1);
+  }, [counter]);
 
   useEffect(() => {
     const horizontalFirst =
@@ -91,18 +78,31 @@ function Main({ players, setPlayerNames }) {
 
     if (horizontal || vertical || diagonal) {
       setStatus('win');
-      counter += 1;
-      changeTurn();
       turn === players.first.name
         ? (players.first.score += 1)
         : (players.second.score += 1);
-    } else if (level === 9) {
-      counter += 1;
+    } else if (
+      (counter % 2 === 0 && level === 9) ||
+      (counter % 2 === 1 && level === 10)
+    ) {
       setStatus('draw');
+    } else {
+      level % 2 === 0
+        ? setTurn(players.first.name)
+        : setTurn(players.second.name);
+      setLevel((prev) => prev + 1);
     }
   }, [squares]);
 
-  const navigate = useNavigate();
+  const handleClear = () => {
+    setSquares(initialSquares);
+    setStatus('');
+    setCounter((prev) => prev + 1);
+  };
+  const handleNew = () => {
+    setPlayerNames('', '');
+    navigate('/', { replace: true });
+  };
 
   return (
     <main className={styles.main}>
@@ -128,20 +128,12 @@ function Main({ players, setPlayerNames }) {
           type="button"
           text={lang === 'en' ? 'Clear' : 'پاک کردن'}
           color="orange"
-          onClick={() => {
-            setSquares(initialSquares);
-            setStatus('');
-          }}
+          onClick={handleClear}
         />
         <Button
           type="button"
           text={lang === 'en' ? 'New Play' : 'بازی جدید'}
-          onClick={() => {
-            setSquares(initialSquares);
-            setStatus('');
-            setPlayerNames('', '');
-            navigate('/', { replace: true });
-          }}
+          onClick={handleNew}
         />
         <style jsx="true">{`
           ${lang === 'en'
