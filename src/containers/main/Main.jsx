@@ -17,6 +17,16 @@ function Main({ players, dispatchPlayers }) {
   }, [lang]);
 
   const [turn, setTurn] = useState(players.first.name);
+  const [status, setStatus] = useState('');
+  const [counter, setCounter] = useState(0);
+  const [level, setLevel] = useState(0);
+
+  useEffect(() => {
+    counter % 2 === 0 ? setLevel(0) : setLevel(1);
+    level % 2 === 0
+      ? setTurn(players.first.name)
+      : setTurn(players.second.name);
+  }, [counter]);
 
   const initialSquares = {
     1: '',
@@ -40,14 +50,6 @@ function Main({ players, dispatchPlayers }) {
     }
   };
   const [squares, dispatchSquares] = useReducer(squaresReducer, initialSquares);
-
-  const [status, setStatus] = useState('');
-  const [counter, setCounter] = useState(0);
-  const [level, setLevel] = useState(0);
-
-  useEffect(() => {
-    counter % 2 === 0 ? setLevel(0) : setLevel(1);
-  }, [counter]);
 
   useEffect(() => {
     const horizontalFirst =
@@ -108,9 +110,9 @@ function Main({ players, dispatchPlayers }) {
   }, [squares]);
 
   const handleClear = useCallback(() => {
+    setCounter((prev) => prev + 1);
     dispatchSquares({ type: 'clear' });
     setStatus('');
-    setCounter((prev) => prev + 1);
   }, []);
 
   const handleNew = useCallback(() => {
