@@ -7,7 +7,7 @@ import styles from './styles.module.scss';
 import { useTheme, useLang } from '../../hooks';
 import { Input, Button } from '../../components';
 
-function Start({ setPlayerNames }) {
+function Start({ dispatchPlayers }) {
   const { lang } = useLang();
 
   useEffect(() => {
@@ -24,7 +24,11 @@ function Start({ setPlayerNames }) {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    setPlayerNames(data.firstPlayer, data.secondPlayer);
+    dispatchPlayers({
+      type: 'setPlayers',
+      firstName: data.firstPlayer,
+      secondName: data.secondPlayer,
+    });
     navigate('/game', { replace: true });
   };
 

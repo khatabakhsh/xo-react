@@ -4,17 +4,15 @@ import React, { memo, useCallback } from 'react';
 import styles from './styles.module.scss';
 import { useTheme } from '../../hooks';
 
-function Square({ square, setSquares, index, turn, status, firstPlayerName }) {
+function Square({ square, dispatch, index, status, firstPlayerName }) {
   const { theme } = useTheme();
+
   const handleClick = useCallback(() => {
     if (square === '' && !status) {
-      setSquares((prev) => ({ ...prev, [index]: turn }));
+      dispatch({ type: 'put', index });
     }
-  }, [turn]);
-  let letter = '';
-  if (square !== '') {
-    letter = square[0].toUpperCase();
-  }
+  }, [status]);
+
   return (
     <span
       role="button"
@@ -24,7 +22,7 @@ function Square({ square, setSquares, index, turn, status, firstPlayerName }) {
         square === firstPlayerName ? styles.firstPlayer : styles.secondPlayer
       }`}
     >
-      {letter}
+      {square && square[0].toUpperCase()}
     </span>
   );
 }

@@ -1,13 +1,13 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-expressions */
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useReducer, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './styles.module.scss';
 import { Button, Grid, Square, Info } from '../../components';
 import { useLang } from '../../hooks';
 
-function Main({ players, setPlayerNames }) {
+function Main({ players, dispatchPlayers }) {
   const { lang } = useLang();
   const navigate = useNavigate();
 
@@ -15,6 +15,8 @@ function Main({ players, setPlayerNames }) {
     document.title =
       lang === 'en' ? 'Tic-Tac-Toe : Playing' : 'بازی دوز : در حال بازی';
   }, [lang]);
+
+  const [turn, setTurn] = useState(players.first.name);
 
   const initialSquares = {
     1: '',
@@ -27,9 +29,19 @@ function Main({ players, setPlayerNames }) {
     8: '',
     9: '',
   };
-  const [squares, setSquares] = useState(initialSquares);
+  const squaresReducer = (state, action) => {
+    switch (action.type) {
+      case 'put':
+        return { ...state, [action.index]: turn };
+      case 'clear':
+        return initialSquares;
+      default:
+        throw new Error();
+    }
+  };
+  const [squares, dispatchSquares] = useReducer(squaresReducer, initialSquares);
+
   const [status, setStatus] = useState('');
-  const [turn, setTurn] = useState(players.first.name);
   const [counter, setCounter] = useState(0);
   const [level, setLevel] = useState(0);
 
@@ -78,9 +90,10 @@ function Main({ players, setPlayerNames }) {
 
     if (horizontal || vertical || diagonal) {
       setStatus('win');
-      turn === players.first.name
-        ? (players.first.score += 1)
-        : (players.second.score += 1);
+      dispatchPlayers({
+        type: 'increaseScore',
+        player: turn === players.first.name ? 'first' : 'second',
+      });
     } else if (
       (counter % 2 === 0 && level === 9) ||
       (counter % 2 === 1 && level === 10)
@@ -95,14 +108,15 @@ function Main({ players, setPlayerNames }) {
   }, [squares]);
 
   const handleClear = useCallback(() => {
-    setSquares(initialSquares);
+    dispatchSquares({ type: 'clear' });
     setStatus('');
     setCounter((prev) => prev + 1);
-  }, [counter]);
+  }, []);
+
   const handleNew = useCallback(() => {
-    setPlayerNames('', '');
+    dispatchPlayers({ type: 'resetPlayers' });
     navigate('/', { replace: true });
-  }, [players.first.name]);
+  }, []);
 
   return (
     <main className={styles.main}>
@@ -112,9 +126,8 @@ function Main({ players, setPlayerNames }) {
           return (
             <Square
               square={squares[squareIndex]}
-              setSquares={setSquares}
+              dispatch={dispatchSquares}
               index={Number(squareIndex)}
-              turn={turn}
               status={status}
               firstPlayerName={players.first.name}
               // don't use index of map. squareIndex is string and unique.

@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-return-assign */
+import React, { useEffect, useReducer } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.scss';
 import { PageLayout } from './components';
@@ -13,27 +15,45 @@ function App() {
     document.documentElement.style.setProperty('--vh', `${vh}px`);
   }, []);
 
-  const [players, setPlayers] = useState({
+  const initialPlayers = {
     first: { name: '', score: 0 },
     second: { name: '', score: 0 },
-  });
-  const setPlayerNames = (name1, name2) => {
-    setPlayers(() => ({
-      first: { name: name1, score: 0 },
-      second: { name: name2, score: 0 },
-    }));
   };
+  const playersReducer = (state, action) => {
+    switch (action.type) {
+      case 'setPlayers':
+        return {
+          first: { ...state.first, name: action.firstName },
+          second: { ...state.second, name: action.secondName },
+        };
+      case 'increaseScore':
+        return {
+          ...state,
+          [action.player]: {
+            ...state[action.player],
+            score: (state[action.player].score += 1),
+          },
+        };
+      case 'resetPlayers':
+        return initialPlayers;
+
+      default:
+        throw new Error();
+    }
+  };
+  const [players, dispatchPlayers] = useReducer(playersReducer, initialPlayers);
+
   return (
     <PageLayout>
       <Header />
       <Routes>
-        <Route path="/" element={<Start setPlayerNames={setPlayerNames} />} />
+        <Route path="/" element={<Start dispatchPlayers={dispatchPlayers} />} />
         {players.first.name === '' && (
           <Route path="game" element={<Navigate to="/" />} />
         )}
         <Route
           path="game"
-          element={<Main players={players} setPlayerNames={setPlayerNames} />}
+          element={<Main players={players} dispatchPlayers={dispatchPlayers} />}
         />
       </Routes>
       <Footer />
