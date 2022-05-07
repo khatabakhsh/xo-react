@@ -107,6 +107,7 @@ function Main({ players, dispatchPlayers }) {
           text={lang === 'en' ? 'Clear' : 'پاک کردن'}
           color="orange"
           onClick={handleClear}
+          disabled={status === ''}
         />
         <Button
           type="button"

@@ -4,7 +4,7 @@ import React, { memo } from 'react';
 import styles from './styles.module.scss';
 import { useTheme, useLang } from '../../hooks';
 
-function Button({ type, text, color, onClick }) {
+function Button({ type, text, color, onClick, disabled }) {
   const { theme } = useTheme();
   const { lang } = useLang();
   let bgColor = null;
@@ -18,6 +18,7 @@ function Button({ type, text, color, onClick }) {
       className={`${styles.button} ${bgColor}`}
       type={type}
       onClick={onClick}
+      disabled={disabled}
     >
       {text}
 
