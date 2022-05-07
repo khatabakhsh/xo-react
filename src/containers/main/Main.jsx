@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './styles.module.scss';
 import { Button, Grid, Square, Info } from '../../components';
 import { useLang } from '../../hooks';
+import checkWin from '../../util/checkWin';
 
 function Main({ players, dispatchPlayers }) {
   const { lang } = useLang();
@@ -52,45 +53,7 @@ function Main({ players, dispatchPlayers }) {
   const [squares, dispatchSquares] = useReducer(squaresReducer, initialSquares);
 
   useEffect(() => {
-    const horizontalFirst =
-      squares[1] === squares[2] &&
-      squares[2] === squares[3] &&
-      squares[2] !== '';
-    const horizontalSecond =
-      squares[4] === squares[5] &&
-      squares[5] === squares[6] &&
-      squares[5] !== '';
-    const horizontalThird =
-      squares[7] === squares[8] &&
-      squares[8] === squares[9] &&
-      squares[8] !== '';
-    const horizontal = horizontalFirst || horizontalSecond || horizontalThird;
-
-    const verticalFirst =
-      squares[1] === squares[4] &&
-      squares[4] === squares[7] &&
-      squares[4] !== '';
-    const verticalSecond =
-      squares[2] === squares[5] &&
-      squares[5] === squares[8] &&
-      squares[5] !== '';
-    const verticalThird =
-      squares[3] === squares[6] &&
-      squares[6] === squares[9] &&
-      squares[6] !== '';
-    const vertical = verticalFirst || verticalSecond || verticalThird;
-
-    const diagonalFirst =
-      squares[1] === squares[5] &&
-      squares[5] === squares[9] &&
-      squares[5] !== '';
-    const diagonalSecond =
-      squares[3] === squares[5] &&
-      squares[5] === squares[7] &&
-      squares[5] !== '';
-    const diagonal = diagonalFirst || diagonalSecond;
-
-    if (horizontal || vertical || diagonal) {
+    if (checkWin(squares)) {
       setStatus('win');
       dispatchPlayers({
         type: 'increaseScore',
