@@ -22,13 +22,6 @@ function Main({ players, dispatchPlayers }) {
   const [counter, setCounter] = useState(0);
   const [level, setLevel] = useState(0);
 
-  useEffect(() => {
-    counter % 2 === 0 ? setLevel(0) : setLevel(1);
-    level % 2 === 0
-      ? setTurn(players.first.name)
-      : setTurn(players.second.name);
-  }, [counter]);
-
   const initialSquares = {
     1: '',
     2: '',
@@ -54,16 +47,18 @@ function Main({ players, dispatchPlayers }) {
 
   useEffect(() => {
     if (checkWin(squares)) {
-      setStatus('win');
       dispatchPlayers({
         type: 'increaseScore',
         player: turn === players.first.name ? 'first' : 'second',
       });
+      setStatus('win');
+      setCounter((prev) => prev + 1);
     } else if (
       (counter % 2 === 0 && level === 9) ||
       (counter % 2 === 1 && level === 10)
     ) {
       setStatus('draw');
+      setCounter((prev) => prev + 1);
     } else {
       level % 2 === 0
         ? setTurn(players.first.name)
@@ -73,10 +68,17 @@ function Main({ players, dispatchPlayers }) {
   }, [squares]);
 
   const handleClear = useCallback(() => {
-    setCounter((prev) => prev + 1);
-    dispatchSquares({ type: 'clear' });
     setStatus('');
-  }, []);
+    dispatchSquares({ type: 'clear' });
+
+    if (counter % 2 === 0) {
+      setLevel(0);
+      setTurn(players.first.name);
+    } else {
+      setLevel(1);
+      setTurn(players.second.name);
+    }
+  }, [counter]);
 
   const handleNew = useCallback(() => {
     dispatchPlayers({ type: 'resetPlayers' });

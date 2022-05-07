@@ -11,7 +11,7 @@ function Square({ square, dispatch, index, status, firstPlayerName }) {
     if (square === '' && !status) {
       dispatch({ type: 'put', index });
     }
-  }, [status]);
+  }, [status, square]);
 
   return (
     <span
