@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import './assets/sass/reset.scss';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 import { ThemeProvider } from './contexts/theme';
 import { LanguageProvider } from './contexts/language';
 import App from './App';
@@ -12,7 +14,9 @@ root.render(
   <BrowserRouter>
     <ThemeProvider>
       <LanguageProvider>
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </LanguageProvider>
     </ThemeProvider>
   </BrowserRouter>
