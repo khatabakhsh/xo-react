@@ -16,7 +16,7 @@ const reducer = (state = initialState, action = {}) => {
     case 'CLEAR_SQUARES':
       return initialState;
     default:
-      return initialState;
+      return state;
   }
 };
 
