@@ -1,8 +1,10 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-expressions */
-import React, { useState, useReducer, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { clearSquares } from '../../redux/squares/action';
 import styles from './styles.module.scss';
 import { Button, Grid, Square, Info } from '../../components';
 import { useLang } from '../../hooks';
@@ -17,33 +19,13 @@ function Main({ players, dispatchPlayers }) {
       lang === 'en' ? 'Tic-Tac-Toe : Playing' : 'بازی دوز : در حال بازی';
   }, [lang]);
 
+  const squares = useSelector((state) => state.squares);
+  const dispatch = useDispatch();
+
   const [turn, setTurn] = useState(players.first.name);
   const [status, setStatus] = useState('');
   const [counter, setCounter] = useState(0);
   const [level, setLevel] = useState(0);
-
-  const initialSquares = {
-    1: '',
-    2: '',
-    3: '',
-    4: '',
-    5: '',
-    6: '',
-    7: '',
-    8: '',
-    9: '',
-  };
-  const squaresReducer = (state, action) => {
-    switch (action.type) {
-      case 'put':
-        return { ...state, [action.index]: turn };
-      case 'clear':
-        return initialSquares;
-      default:
-        throw new Error();
-    }
-  };
-  const [squares, dispatchSquares] = useReducer(squaresReducer, initialSquares);
 
   useEffect(() => {
     if (checkWin(squares)) {
@@ -69,7 +51,7 @@ function Main({ players, dispatchPlayers }) {
 
   const handleClear = useCallback(() => {
     setStatus('');
-    dispatchSquares({ type: 'clear' });
+    dispatch(clearSquares());
 
     if (counter % 2 === 0) {
       setLevel(0);
@@ -93,8 +75,8 @@ function Main({ players, dispatchPlayers }) {
           return (
             <Square
               square={squares[squareIndex]}
-              dispatch={dispatchSquares}
               index={Number(squareIndex)}
+              turn={turn}
               status={status}
               firstPlayerName={players.first.name}
               // don't use index of map. squareIndex is string and unique.
