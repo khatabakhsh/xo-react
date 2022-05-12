@@ -8,12 +8,14 @@ import { useTheme } from '../../hooks';
 
 function Square({ square, index, turn, status, firstPlayerName }) {
   const { theme } = useTheme();
+
   const dispatch = useDispatch();
+
   const handleClick = useCallback(() => {
     if (square === '' && !status) {
       dispatch(putSquare(index, turn));
     }
-  }, [status, square, turn]);
+  }, [status, turn]);
 
   return (
     <span

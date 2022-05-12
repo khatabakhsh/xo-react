@@ -1,19 +1,23 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { setPlayerNames } from '../../redux/players/action';
 import styles from './styles.module.scss';
 import { useTheme, useLang } from '../../hooks';
 import { Input, Button } from '../../components';
 
-function Start({ dispatchPlayers }) {
+function Start() {
   const { lang } = useLang();
 
   useEffect(() => {
     document.title =
       lang === 'en' ? `Tic-Tac-Toe : Let's Play` : 'بازی دوز : بیا شروع کنیم';
   }, [lang]);
+
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -24,11 +28,7 @@ function Start({ dispatchPlayers }) {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    dispatchPlayers({
-      type: 'setPlayers',
-      firstName: data.firstPlayer,
-      secondName: data.secondPlayer,
-    });
+    dispatch(setPlayerNames(data.firstPlayer, data.secondPlayer));
     navigate('/game', { replace: true });
   };
 

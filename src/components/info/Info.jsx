@@ -1,12 +1,14 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styles from './styles.module.scss';
 import { useTheme, useLang } from '../../hooks';
 
-function Info({ players, turn, status }) {
+function Info({ turn, status }) {
   const { theme } = useTheme();
   const { lang } = useLang();
+  const { players } = useSelector((state) => state);
 
   const CONTENT = {
     TURN: lang === 'en' ? 'Turn' : 'نوبت',

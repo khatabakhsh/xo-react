@@ -5,12 +5,13 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { clearSquares } from '../../redux/squares/action';
+import { increaseScore, resetPlayers } from '../../redux/players/action';
 import styles from './styles.module.scss';
 import { Button, Grid, Square, Info } from '../../components';
 import { useLang } from '../../hooks';
 import checkWin from '../../util/checkWin';
 
-function Main({ players, dispatchPlayers }) {
+function Main() {
   const { lang } = useLang();
   const navigate = useNavigate();
 
@@ -19,7 +20,7 @@ function Main({ players, dispatchPlayers }) {
       lang === 'en' ? 'Tic-Tac-Toe : Playing' : 'بازی دوز : در حال بازی';
   }, [lang]);
 
-  const squares = useSelector((state) => state.squares);
+  const { players, squares } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   const [turn, setTurn] = useState(players.first.name);
@@ -29,10 +30,7 @@ function Main({ players, dispatchPlayers }) {
 
   useEffect(() => {
     if (checkWin(squares)) {
-      dispatchPlayers({
-        type: 'increaseScore',
-        player: turn === players.first.name ? 'first' : 'second',
-      });
+      dispatch(increaseScore(turn === players.first.name ? 'first' : 'second'));
       setStatus('win');
       setCounter((prev) => prev + 1);
     } else if (
@@ -52,7 +50,6 @@ function Main({ players, dispatchPlayers }) {
   const handleClear = useCallback(() => {
     setStatus('');
     dispatch(clearSquares());
-
     if (counter % 2 === 0) {
       setLevel(0);
       setTurn(players.first.name);
@@ -63,13 +60,13 @@ function Main({ players, dispatchPlayers }) {
   }, [counter]);
 
   const handleNew = useCallback(() => {
-    dispatchPlayers({ type: 'resetPlayers' });
+    dispatch(resetPlayers());
     navigate('/', { replace: true });
   }, []);
 
   return (
     <main className={styles.main}>
-      <Info players={players} turn={turn} status={status} />
+      <Info turn={turn} status={status} />
       <Grid>
         {Object.keys(squares).map((squareIndex) => {
           return (
