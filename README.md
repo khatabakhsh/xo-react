@@ -13,7 +13,7 @@ HTML5 | SASS | ES6 | React v18.0 | Redux
 
 Styled Modules (SCSS) | Styled JSX (CSS in JSX)
 
-Context | Custom Hook | react-router-dom | react-hook-form
+  Context | Custom Hook | react-router-dom | react-hook-form
 
 ESLint (Airbnb Style Guide) | Prettier | editorconfig
 
