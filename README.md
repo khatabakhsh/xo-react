@@ -9,15 +9,15 @@ See Production Deployment on Vercel PaaS: [https://tic-tac-toe.khatabakhsh.ir](h
 
 ## Technologies I used
 
-HTML5 | SCSS | ES6 | React v18.0
+  HTML5 | SASS | ES6 | React v18.0
 
-Styled Modules | Styled JSX (CSS in JSX)
+  Styled Modules (SCSS) | Styled JSX (CSS in JSX)
 
-Context | Custom Hook | react-router-dom | react-hook-form
+  Context | Custom Hook | react-router-dom | react-hook-form
 
-**Redux Toolkit**
+  **Redux Toolkit**
 
-ESLint (Airbnb Style Guild) | Prettier | editorconfig
+  ESLint (Airbnb Style Guide) | Prettier | editorconfig
 
 ### branch: `useReducer`
 
