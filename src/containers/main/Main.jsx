@@ -17,10 +17,8 @@ function Main({ players, dispatchPlayers }) {
       lang === 'en' ? 'Tic-Tac-Toe : Playing' : 'بازی دوز : در حال بازی';
   }, [lang]);
 
-  const [turn, setTurn] = useState(players.first.name);
   const [status, setStatus] = useState('');
   const [counter, setCounter] = useState(0);
-  const [level, setLevel] = useState(0);
 
   const initialSquares = {
     1: '',
@@ -36,7 +34,7 @@ function Main({ players, dispatchPlayers }) {
   const squaresReducer = (state, action) => {
     switch (action.type) {
       case 'put':
-        return { ...state, [action.index]: turn };
+        return { ...state, [action.payload.index]: action.payload.turn };
       case 'clear':
         return initialSquares;
       default:
@@ -44,6 +42,18 @@ function Main({ players, dispatchPlayers }) {
     }
   };
   const [squares, dispatchSquares] = useReducer(squaresReducer, initialSquares);
+
+  const level = Object.values(squares).filter((item) => item !== '').length;
+  // use Closure to set turn value
+  const chooseTurn = () => {
+    if (counter % 2 === 0) {
+      const turn = level % 2 === 0 ? players.first.name : players.second.name;
+      return turn;
+    }
+    const turn = level % 2 === 1 ? players.first.name : players.second.name;
+    return turn;
+  };
+  const turn = chooseTurn();
 
   useEffect(() => {
     if (checkWin(squares)) {
@@ -55,29 +65,16 @@ function Main({ players, dispatchPlayers }) {
       setCounter((prev) => prev + 1);
     } else if (
       (counter % 2 === 0 && level === 9) ||
-      (counter % 2 === 1 && level === 10)
+      (counter % 2 === 1 && level === 9)
     ) {
       setStatus('draw');
       setCounter((prev) => prev + 1);
-    } else {
-      level % 2 === 0
-        ? setTurn(players.first.name)
-        : setTurn(players.second.name);
-      setLevel((prev) => prev + 1);
     }
   }, [squares]);
 
   const handleClear = useCallback(() => {
     setStatus('');
     dispatchSquares({ type: 'clear' });
-
-    if (counter % 2 === 0) {
-      setLevel(0);
-      setTurn(players.first.name);
-    } else {
-      setLevel(1);
-      setTurn(players.second.name);
-    }
   }, [counter]);
 
   const handleNew = useCallback(() => {
@@ -95,6 +92,7 @@ function Main({ players, dispatchPlayers }) {
               square={squares[squareIndex]}
               dispatch={dispatchSquares}
               index={Number(squareIndex)}
+              turn={turn}
               status={status}
               firstPlayerName={players.first.name}
               // don't use index of map. squareIndex is string and unique.

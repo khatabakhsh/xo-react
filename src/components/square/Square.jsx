@@ -4,12 +4,12 @@ import React, { memo, useCallback } from 'react';
 import styles from './styles.module.scss';
 import { useTheme } from '../../hooks';
 
-function Square({ square, dispatch, index, status, firstPlayerName }) {
+function Square({ square, dispatch, index, turn, status, firstPlayerName }) {
   const { theme } = useTheme();
 
   const handleClick = useCallback(() => {
     if (square === '' && !status) {
-      dispatch({ type: 'put', index });
+      dispatch({ type: 'put', payload: { index, turn } });
     }
   }, [status, square]);
 
