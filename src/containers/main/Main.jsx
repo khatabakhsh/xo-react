@@ -22,41 +22,38 @@ function Main() {
 
   const { players, squares } = useSelector((state) => state);
   const dispatch = useDispatch();
-
-  const [turn, setTurn] = useState(players.first.name);
   const [status, setStatus] = useState('');
   const [counter, setCounter] = useState(0);
-  const [level, setLevel] = useState(0);
+
+  const level = Object.values(squares).filter((item) => item !== '').length;
+  // use Closure to set turn value
+  const chooseTurn = () => {
+    if (counter % 2 === 0) {
+      const turn = level % 2 === 0 ? players.first.name : players.second.name;
+      return turn;
+    }
+    const turn = level % 2 === 1 ? players.first.name : players.second.name;
+    return turn;
+  };
+  const turn = chooseTurn();
 
   useEffect(() => {
     if (checkWin(squares)) {
-      dispatch(increaseScore(turn === players.first.name ? 'first' : 'second'));
+      dispatch(increaseScore(turn === players.first.name ? 'second' : 'first'));
       setStatus('win');
       setCounter((prev) => prev + 1);
     } else if (
       (counter % 2 === 0 && level === 9) ||
-      (counter % 2 === 1 && level === 10)
+      (counter % 2 === 1 && level === 9)
     ) {
       setStatus('draw');
       setCounter((prev) => prev + 1);
-    } else {
-      level % 2 === 0
-        ? setTurn(players.first.name)
-        : setTurn(players.second.name);
-      setLevel((prev) => prev + 1);
     }
   }, [squares]);
 
   const handleClear = useCallback(() => {
     setStatus('');
     dispatch(clearSquares());
-    if (counter % 2 === 0) {
-      setLevel(0);
-      setTurn(players.first.name);
-    } else {
-      setLevel(1);
-      setTurn(players.second.name);
-    }
   }, [counter]);
 
   const handleNew = useCallback(() => {
